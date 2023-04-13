@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # apps
+    "users"
 ]
 
 MIDDLEWARE = [
@@ -81,6 +84,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# Auth User
+AUTH_USER_MODEL = "users.User"
 
 
 # Password validation
@@ -131,3 +138,5 @@ MEDIA_ROOT = BASE_DIR / "static/images/uploads"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = "/login/"

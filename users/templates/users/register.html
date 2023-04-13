@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Register Page</h1>
+	<form id="register-form" method="post" action="{% url "register" %}">
+		{% csrf_token %}
+		<div>
+			{% for field in form %}
+				<div>
+					<div>
+						<label for="field.id_for_label">{{ field.label }}</label>
+						{{ field }}
+						<div>
+							<ul>
+								{% for error in field.errors %}
+									<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div>
+				<div>
+					<button id="submit" type="submit">
+						Register
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+{% endblock %}

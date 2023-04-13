@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% include "header_refrences.html" %}
+    {% block header_refrences %}{% endblock %}
+</head>
+
+<body>
+
+<div id="messages-container">
+    {% if messages %}
+        {% for message in messages %}
+            <div><p>{{ message }}</p></div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% block content %}{% endblock %}
+
+{% include "footer_refrences.html" %}
+{% block footer_refrences %}{% endblock %}
+
+</body>
+
+</html>
