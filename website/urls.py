@@ -6,5 +6,5 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
-    path("new-group/", GroupCreationView.as_view(), name='create group'),
+    path("groups/new/", GroupCreationView.as_view(), name='create-group'),
 ]

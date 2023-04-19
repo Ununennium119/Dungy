@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load startswith %}
+
+{% block content %}
+	<h1>Create Group</h1>
+	<form id="create-group-form" method="post" action="{% url "create-group" %}">
+		{% csrf_token %}
+		<div>
+			<div>
+				<div>
+					<label for="field.id_for_label">{{ form.name.label }}</label>
+					{{ form.name }}
+					<div>
+						<ul>
+							{% for error in form.name.errors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<label for="field.id_for_label">{{ form.type.label }}</label>
+					{{ form.type }}
+					<div>
+						<ul>
+							{% for error in form.type.errors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div>
+				<span>MEMBERS</span>
+				<div>
+					<span>{{ user.username }} ({{ user.email }})</span>
+				</div>
+				{% for field in form %}
+					{% if field.name|startswith:"member_" %}
+						<div>
+							<div>
+								<label for="field.id_for_label">{{ field.label }}</label>
+								{{ field }}
+								<div>
+									<ul>
+										{% for error in field.errors %}
+											<li>{{ error }}</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div>
+				<div>
+					<label for="field.id_for_label">{{ form.image.label }}</label>
+					{{ form.image }}
+					<div>
+						<ul>
+							{% for error in form.image.errors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			{#			<div id="members-container">#}
+			{#				<span>Members</span>#}
+			{#				<div>#}
+			{#					<span>{{ user.username }} ({{ user.email }})</span>#}
+			{#				</div>#}
+			{#				<div>#}
+			{#					<label for="id_member_1"></label><input type="email" name="member_1" id="id_member_1">#}
+			{#				</div>#}
+			{#				<div>#}
+			{#					<label for="id_member_2"></label><input type="email" name="member_2" id="id_member_2">#}
+			{#				</div>#}
+			{#				<div>#}
+			{#					<label for="id_member_3"></label><input type="email" name="member_3" id="id_member_3">#}
+			{#				</div>#}
+			{#			</div>#}
+			<div>
+				<div>
+					<button id="submit" type="submit">
+						Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+{% endblock %}

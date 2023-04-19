@@ -1,4 +1,3 @@
-from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -6,7 +5,7 @@ from django.views.generic import CreateView
 from website.forms import UserRegisterForm
 
 
-class RegisterView(SuccessMessageMixin, CreateView):
+class RegisterView(CreateView):
     template_name = "register.html"
     form_class = UserRegisterForm
     success_url = reverse_lazy("login")
