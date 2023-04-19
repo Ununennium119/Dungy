@@ -1,0 +1,2 @@
+class GroupCreationController:
+    pass
