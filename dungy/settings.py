@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # apps
-    "users",
     "website",
 
     # third-party
@@ -92,7 +91,7 @@ DATABASES = {
 
 
 # Auth User
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "website.User"
 
 # reCaptcha
 RECAPTCHA_PUBLIC_KEY = "6LdGvJ0lAAAAAFxuBDLFllr5AbbZvJLRvyaQsiSw"

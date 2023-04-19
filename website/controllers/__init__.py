@@ -1,1 +1,1 @@
-from .GroupController import *
+from .group_controller import *

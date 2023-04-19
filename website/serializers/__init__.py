@@ -1,1 +1,1 @@
-from .GroupSerializer import GroupSerializer
+from .group_serializer import GroupSerializer

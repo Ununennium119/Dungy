@@ -1,16 +1,7 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.core import validators
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
-
-from users.models import User
-
-
-class UserRegisterForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ["username", "email", "password1", "password2"]
+from django import forms
+from django.core import validators
 
 
 class UserLoginForm(forms.Form):

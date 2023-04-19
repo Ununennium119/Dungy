@@ -15,8 +15,3 @@ class GroupAdmin(admin.ModelAdmin):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     pass
-
-
-@admin.register(AdminUser)
-class AdminUserAdmin(admin.ModelAdmin):
-    pass
