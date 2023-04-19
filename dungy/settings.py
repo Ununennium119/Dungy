@@ -42,8 +42,10 @@ INSTALLED_APPS = [
 
     # apps
     "users",
+    "website",
 
     # third-party
+    "rest_framework",
     "captcha",
 ]
 
