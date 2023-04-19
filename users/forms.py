@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core import validators
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 from users.models import User
 
@@ -23,3 +25,4 @@ class UserLoginForm(forms.Form):
             validators.MaxLengthValidator(150)
         ]
     )
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")

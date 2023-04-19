@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # apps
-    "users"
+    "users",
+
+    # third-party
+    "captcha",
 ]
 
 MIDDLEWARE = [
@@ -88,6 +91,10 @@ DATABASES = {
 
 # Auth User
 AUTH_USER_MODEL = "users.User"
+
+# reCaptcha
+RECAPTCHA_PUBLIC_KEY = "6LdGvJ0lAAAAAFxuBDLFllr5AbbZvJLRvyaQsiSw"
+RECAPTCHA_PRIVATE_KEY = "6LdGvJ0lAAAAAPWc3tElBzKg_7Reb7ijKMVuHWYB"
 
 
 # Password validation
