@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% load startswith %}
+
+{% block title %}
+	{{ object.name }} | Dungy
+{% endblock %}
+
+{% block content %}
+	<h1>{{ object.name }}</h1>
+
+{% endblock %}
+
+{% block footer_refrences %}
+	<script src="{% static 'js/group-add-remove-member.js' %}"></script>
+{% endblock %}

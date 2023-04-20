@@ -1,16 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import View
+from django.views.generic import View, DetailView
 
 from website.forms import GroupCreationForm
-from website.models import User
+from website.models import User, Group
 
 
 @method_decorator(login_required, name='dispatch')
 class GroupCreationView(View):
-    template_name = 'create-group.html'
+    template_name = 'group/create-group.html'
     form_class = GroupCreationForm
 
     def get(self, request, *args, **kwargs):
@@ -42,4 +43,18 @@ class GroupCreationView(View):
         return render(request, self.template_name, context)
 
 
+@method_decorator(login_required, name='dispatch')
+class GroupDetailView(DetailView):
+    model = Group
+    template_name = 'group/single-group.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        group: Group = self.object
+
+        if self.request.user.is_authenticated:
+            user_id = self.request.user.id
+            if not group.members.filter(id=user_id).exists():
+                raise PermissionDenied()
+
+        return context
