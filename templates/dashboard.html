@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+	Dashboard | Dungy
+{% endblock %}
+
 {% block content %}
 	<h1>Dashboard Page</h1>
 	<a href="{% url "create-group" %}">Create Group</a>

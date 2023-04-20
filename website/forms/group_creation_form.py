@@ -10,10 +10,19 @@ class GroupCreationForm(forms.ModelForm):
         labels = {'name': 'GROUP NAME', 'type': 'GROUP TYPE', 'image': ''}
 
     def __init__(self, *args, **kwargs):
+        try:
+            members_fields_count = int(kwargs.pop('members_fields_count', 3))
+        except (ValueError, TypeError):
+            members_fields_count = 3
+
         super(GroupCreationForm, self).__init__(*args, **kwargs)
 
-        for i in range(3):
-            self.fields[f'member_{i}'] = forms.EmailField(label='', required=False)
+        self.fields['members_fields_count'] = forms.CharField(widget=forms.HiddenInput(attrs={'autocomplete': 'off'}))
+
+        self.fields['members_fields_count'].initial = members_fields_count
+        for i in range(members_fields_count):
+            self.fields[f'member_{i}'] = forms.EmailField(label='', required=False,
+                                                          widget=forms.TextInput(attrs={'autocomplete': 'off'}))
 
     def get_members_email(self):
         members_email = []

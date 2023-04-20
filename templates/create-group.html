@@ -1,9 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 {% load startswith %}
 
+{% block title %}
+	Create a group | Dungy
+{% endblock %}
+
 {% block content %}
-	<h1>Create Group</h1>
-	<form id="create-group-form" method="post" action="{% url "create-group" %}">
+	<h1>Create a Group</h1>
+	<form id="create-group-form" method="post" action="{% url "create-group" %}" enctype=multipart/form-data>
 		{% csrf_token %}
 		<div>
 			<div>
@@ -19,6 +24,35 @@
 					</div>
 				</div>
 			</div>
+			<hr>
+			<div id="members-container">
+				<span>MEMBERS</span>
+				{{ form.members_fields_count }}
+				<div>
+					<span>{{ user.username }} ({{ user.email }})</span>
+				</div>
+				<br>
+				{% for field in form %}
+					{% if field.name|startswith:"member_" %}
+						<div id="{{ field.name }}-container">
+							<div>
+								<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+								{{ field }}
+								<button id="remove-{{ field.name }}" data-field-name="{{ field.name }}">X</button>
+								<div>
+									<ul>
+										{% for error in field.errors %}
+											<li>{{ error }}</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<button id="add-extra-member">+ Add a person</button>
+			<hr>
 			<div>
 				<div>
 					<label for="field.id_for_label">{{ form.type.label }}</label>
@@ -32,29 +66,7 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<span>MEMBERS</span>
-				<div>
-					<span>{{ user.username }} ({{ user.email }})</span>
-				</div>
-				{% for field in form %}
-					{% if field.name|startswith:"member_" %}
-						<div>
-							<div>
-								<label for="field.id_for_label">{{ field.label }}</label>
-								{{ field }}
-								<div>
-									<ul>
-										{% for error in field.errors %}
-											<li>{{ error }}</li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
+			<hr>
 			<div>
 				<div>
 					<label for="field.id_for_label">{{ form.image.label }}</label>
@@ -68,21 +80,6 @@
 					</div>
 				</div>
 			</div>
-			{#			<div id="members-container">#}
-			{#				<span>Members</span>#}
-			{#				<div>#}
-			{#					<span>{{ user.username }} ({{ user.email }})</span>#}
-			{#				</div>#}
-			{#				<div>#}
-			{#					<label for="id_member_1"></label><input type="email" name="member_1" id="id_member_1">#}
-			{#				</div>#}
-			{#				<div>#}
-			{#					<label for="id_member_2"></label><input type="email" name="member_2" id="id_member_2">#}
-			{#				</div>#}
-			{#				<div>#}
-			{#					<label for="id_member_3"></label><input type="email" name="member_3" id="id_member_3">#}
-			{#				</div>#}
-			{#			</div>#}
 			<div>
 				<div>
 					<button id="submit" type="submit">
@@ -92,4 +89,8 @@
 			</div>
 		</div>
 	</form>
+{% endblock %}
+
+{% block footer_refrences %}
+	<script src="{% static 'js/group-add-remove-member.js' %}"></script>
 {% endblock %}

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+	Login | Dungy
+{% endblock %}
+
 {% block content %}
 	<h1>Login Page</h1>
 	<form id="login-form" method="post" action="{% url "login" %}">
@@ -8,7 +12,7 @@
 			{% for field in form %}
 				<div>
 					<div>
-						<label for="field.id_for_label">{{ field.label }}</label>
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
 						{{ field }}
 						<div>
 							<ul>
