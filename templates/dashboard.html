@@ -6,7 +6,20 @@
 
 {% block content %}
 	<h1>Dashboard Page</h1>
-	<a href="{% url "create-group" %}">Create Group</a>
-	<br>
-	<a href="{% url "logout" %}">Logout</a>
+	<hr>
+	<a href="{% url "logout" %}">Log out</a>
+	<hr>
+	<div>
+		<h2>Groups</h2>
+		{% for group in request.user.group_set.all %}
+			<div>
+				<a href="{% url 'single-group' slug=group.slug %}">{{ group.name }}</a>
+				<br>
+				<span>{{ group.type }}</span>
+				<br>
+				<br>
+			</div>
+		{% endfor %}
+	</div>
+	<a href="{% url "create-group" %}">Create a group</a>
 {% endblock %}

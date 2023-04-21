@@ -8,7 +8,24 @@
 
 {% block content %}
 	<h1>{{ object.name }}</h1>
-
+	<hr>
+	<a href="{% url 'dashboard' %}">Dashboard</a>
+	<hr>
+	<div>
+		<h2>Expenses</h2>
+		{% for cost in object.costs_set.all %}
+			<div>
+				<span>{{ cost.date }}</span>
+				<br>
+				<span>{{ cost.description }}</span>
+				<br>
+				<span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
+				<br>
+				<br>
+			</div>
+		{% endfor %}
+	</div>
+	<a href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
 {% endblock %}
 
 {% block footer_refrences %}

@@ -1,16 +1,24 @@
 import uuid
 
+from django.core.validators import MinValueValidator
 from django.db import models
+from django.utils.timezone import now
 
-from website.models import User
+from website.models import User, Group
 
 
 class Cost(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    description = models.TextField(null=False)
+    description = models.CharField(max_length=200)
+    amount = models.FloatField(default=0.0, validators=[MinValueValidator(0.0)])
     members = models.ManyToManyField(to=User, related_name='shared_costs')
-    amount = models.FloatField(default=0.0)
-    # split_type = models.TextChoices()
-    paid_by = models.OneToOneField(to=User, null=False, on_delete=models.CASCADE, related_name='paid_costs')
-    # image = models.ImageField()
-    time = models.DateTimeField(null=False)
+    paid_by = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='paid_costs')
+    date = models.DateField(default=now)
+    image = models.ImageField(upload_to='cost-images', null=True, blank=True)
+    note = models.TextField(null=True, blank=True)
+    group = models.ForeignKey(to=Group, on_delete=models.CASCADE, related_name='costs_set')
+
+    # ToDo: Category and Split Type
+
+    def __str__(self):
+        return f"{self.description} in {self.group}"

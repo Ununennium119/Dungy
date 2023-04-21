@@ -52,9 +52,8 @@ class GroupDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         group: Group = self.object
 
-        if self.request.user.is_authenticated:
-            user_id = self.request.user.id
-            if not group.members.filter(id=user_id).exists():
-                raise PermissionDenied()
+        user_id = self.request.user.id
+        if not group.members.filter(id=user_id).exists():
+            raise PermissionDenied()
 
         return context
