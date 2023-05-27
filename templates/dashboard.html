@@ -5,13 +5,10 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Dashboard Page</h1>
-	<hr>
-	<a href="{% url "logout" %}">Log out</a>
-	<hr>
 	<div>
+        <h2>{{ user.username }}'s Dashbord</h2>
 		<h2>Groups</h2>
-		{% for group in request.user.group_set.all %}
+		{% for group in groups %}
 			<div>
 				<a href="{% url 'single-group' slug=group.slug %}">{{ group.name }}</a>
 				<br>
@@ -22,4 +19,6 @@
 		{% endfor %}
 	</div>
 	<a href="{% url "create-group" %}">Create a group</a>
+	<hr>
+	<a href="{% url "logout" %}">Log out</a>
 {% endblock %}
