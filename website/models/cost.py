@@ -17,6 +17,7 @@ class Cost(models.Model):
     image = models.ImageField(upload_to='cost-images', null=True, blank=True)
     note = models.TextField(null=True, blank=True)
     group = models.ForeignKey(to=Group, on_delete=models.CASCADE, related_name='costs_set')
+    archived = models.BooleanField(default=False)
 
     # ToDo: Category and Split Type
 

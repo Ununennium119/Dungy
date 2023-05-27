@@ -56,4 +56,10 @@ class GroupDetailView(DetailView):
         if not group.members.filter(id=user_id).exists():
             raise PermissionDenied()
 
+        archived = self.request.GET.get('archived', 'off') == 'on'
+        paid = self.request.GET.get('paid', 'off') == 'on'
+        context['costs'] = group.costs_set.filter(archived=archived, paid_by__isnull=not paid)
+        context['archived'] = archived
+        context['paid'] = paid
+
         return context
