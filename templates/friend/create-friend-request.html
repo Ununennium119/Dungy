@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% load startswith %}
+
+{% block title %}
+	Send a friend request | Dungy
+{% endblock %}
+
+{% block content %}
+	<h1>Send a friend request</h1>
+	<form id="create-cost-form" method="post" action="{% url 'add-friend' %}"
+		  enctype=multipart/form-data>
+		{% csrf_token %}
+		<div>
+			{% for field in form %}
+				<div>
+					<div>
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+						{{ field }}
+						<div>
+							<ul>
+								{% for error in field.errors %}
+									<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div>
+				<div>
+					<button id="submit" type="submit">
+						Send Friend Request
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+{% endblock %}
+

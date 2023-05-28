@@ -10,7 +10,7 @@ class DashboardView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['username'] = self.request.user.username
-        context['groups'] = self.request.user.group_set.all()
+        context['groups'] = self.request.user.group_set.all().prefetch_related('costs_set')
         context['owe'] = 12
         context['owed'] = 2
         context['total_balance'] = context['owe'] + context['owed']

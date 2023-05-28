@@ -20,13 +20,14 @@
 
 <body>
 
-<div id="messages-container">
-	{% if messages %}
-		{% for message in messages %}
-			<div><p>{{ message }}</p></div>
-		{% endfor %}
-	{% endif %}
-</div>
+{# ToDo: add styling for messages and uncomment this #}
+{#<div id="messages-container">#}
+{#	{% if messages %}#}
+{#		{% for message in messages %}#}
+{#			<div><p>{{ message }}</p></div>#}
+{#		{% endfor %}#}
+{#	{% endif %}#}
+{#</div>#}
 
 {% block content %}{% endblock %}
 

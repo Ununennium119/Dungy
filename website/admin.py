@@ -7,8 +7,18 @@ class CostAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Debt)
+class DebtAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(FriendRequest)
+class FriendRequest(admin.ModelAdmin):
     pass
 
 

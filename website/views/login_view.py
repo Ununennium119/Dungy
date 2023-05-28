@@ -30,5 +30,5 @@ class LoginView(FormView):
             context['error'] = "Username or password is invalid!"
             messages.error(request, "Username or password is invalid!")
 
-        context['form'] = form.cleaned_data
+        context['form'] = form
         return render(request, "login.html", context)
