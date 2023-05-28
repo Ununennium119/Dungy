@@ -18,7 +18,7 @@ class LoginView(FormView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-
+        context = {}
         if form.is_valid():
             user = authenticate(
                 username=form.cleaned_data.get('username'),
@@ -27,9 +27,8 @@ class LoginView(FormView):
             if user is not None:
                 login(request, user)
                 return redirect(request.GET.get("next", "dashboard"))
+            context['error'] = "Username or password is invalid!"
             messages.error(request, "Username or password is invalid!")
 
-        context = {
-            "form": form.cleaned_data
-        }
+        context['form'] = form.cleaned_data
         return render(request, "login.html", context)

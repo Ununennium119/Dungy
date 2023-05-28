@@ -91,10 +91,10 @@
         <div class="form-group">
             <label for="username">Username</label>
             {% if form.username.value is None %}
-                <input type="text" id="username" name="username" placeholder="Enter your email" required>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
             {% else %}
-                <input value={{ form.username.value }} type="text" id="email" name="email"
-                       placeholder="Enter your email"
+                <input value={{ form.username.value }} type="text" id="username" name="username"
+                       placeholder="Enter your username"
                        required>
             {% endif %}
             {% if form.username.errors %}
@@ -122,6 +122,12 @@
                 </ul>
             {% endif %}
         </div>
+        {% if error %}
+            <div class="errorlist">
+                {{ error }}
+            </div>
+        {% endif %}
+
         <button type="submit" class="btn">Log in</button>
     </form>
 </div>

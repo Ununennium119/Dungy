@@ -1,24 +1,248 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Splitwise Dashboard</title>
+    <style>
+        /* CSS styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-{% block title %}
-	Dashboard | Dungy
-{% endblock %}
+        header {
+            background-color: #ff6b6b;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
 
-{% block content %}
-	<div>
-        <h2>{{ user.username }}'s Dashbord</h2>
-		<h2>Groups</h2>
-		{% for group in groups %}
-			<div>
-				<a href="{% url 'single-group' slug=group.slug %}">{{ group.name }}</a>
-				<br>
-				<span>{{ group.type }}</span>
-				<br>
-				<br>
-			</div>
-		{% endfor %}
-	</div>
-	<a href="{% url "create-group" %}">Create a group</a>
-	<hr>
-	<a href="{% url "logout" %}">Log out</a>
-{% endblock %}
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-section {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-section h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .dashboard-section p {
+            margin-top: 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #34aadc;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #2684b7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f1f1f1;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e8e8e8;
+        }
+
+        tr:hover {
+            background-color: #ccc;
+        }
+
+        .balances {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            margin-top: 20px;
+        }
+
+        .balance-card {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .balance-card h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .balance-card p {
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logout-button,
+        .add-group-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #34aadc;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .profile-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .function-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .profile-button {
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .profile-button:hover {
+            background-color: darkred;
+        }
+
+        .logout-button:hover,
+        .add-group-button:hover {
+            background-color: #2684b7;
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Splitwise</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="dashboard-section">
+        <h2>Your Balances</h2>
+        <div class="balances">
+            <div class="balance-card">
+                <h3>You Owe</h3>
+                <p>${{ owe }}</p>
+            </div>
+            <div class="balance-card">
+                <h3>You Are Owed</h3>
+                <p>${{ owed }}</p>
+            </div>
+            <div class="balance-card">
+                <h3>Total Balance</h3>
+                <p>${{ total_balance }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div>
+            <h2>Expenses/Groups</h2>
+            <table id="table1">
+                <tbody id="table1-body">
+                <!-- Rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Add more sections as needed -->
+</div>
+
+
+<div class="profile-menu">
+    <a class="profile-button" href="/profile">{{ username }}</a>
+    <br>
+    <a class="profile-button" href="/logout">Logout</a>
+</div>
+
+<div class="function-menu">
+    <a class="profile-button" href="#"}>Create Expense</a>
+    <br>
+    <a class="profile-button" href={% url "create-group" %}>Create Group</a>
+</div>
+
+<footer>
+    <div class="container">
+        &copy; 2023 Splitwise. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    // Function to generate table rows
+    function generateTableRows() {
+        let form = document.getElementById("{{ groups }}");
+        let formData = new FormData(form);
+
+        let items = [];
+        for (let value of formData.values()) {
+            items.push(value);
+        }
+
+        let tableBody = document.querySelector("table1-body");
+
+        // Clear existing rows
+        tableBody.innerHTML = "";
+
+        // Iterate through each item and create a table row
+        items.forEach(function (item) {
+            let row = document.createElement("tr");
+            let itemCell = document.createElement("td");
+
+            itemCell.textContent = item;
+
+            row.appendChild(itemCell);
+
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+</body>
+</html>
