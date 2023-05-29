@@ -10,5 +10,8 @@ class FriendRequest(models.Model):
     sender = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='sent_friend_requests_set')
     receiver = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='received_friend_requests_set')
 
+    class Meta:
+        unique_together = ('sender', 'receiver')
+
     def __str__(self):
         return f'Friend request from "{self.sender.username}" to "{self.receiver.username}"'

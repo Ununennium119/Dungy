@@ -1,0 +1,7 @@
+#messages-container {
+    position: fixed;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
