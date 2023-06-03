@@ -2,95 +2,91 @@
 {% load static %}
 {% load startswith %}
 
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/group.css' %}">
+{% endblock %}
+
 {% block title %}
-	Create a group | Dungy
+    Create a group | Dungy
 {% endblock %}
 
 {% block content %}
-	<h1>Create a Group</h1>
-	<form id="create-group-form" method="post" action="{% url "create-group" %}" enctype=multipart/form-data>
-		{% csrf_token %}
-		<div>
-			<div>
-				<div>
-					<label for="field.id_for_label">{{ form.name.label }}</label>
-					{{ form.name }}
-					<div>
-						<ul>
-							{% for error in form.name.errors %}
-								<li>{{ error }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<div id="members-container">
-				<span>MEMBERS</span>
-				{{ form.members_fields_count }}
-				<div>
-					<span>{{ user.username }} ({{ user.email }})</span>
-				</div>
-				<br>
-				{% for field in form %}
-					{% if field.name|startswith:"member_" %}
-						<div id="{{ field.name }}-container">
-							<div>
-								<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-								{{ field }}
-								<button id="remove-{{ field.name }}" data-field-name="{{ field.name }}">X</button>
-								<div>
-									<ul>
-										{% for error in field.errors %}
-											<li>{{ error }}</li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
-			<button id="add-extra-member">+ Add a person</button>
-			<hr>
-			<div>
-				<div>
-					<label for="field.id_for_label">{{ form.type.label }}</label>
-					{{ form.type }}
-					<div>
-						<ul>
-							{% for error in form.type.errors %}
-								<li>{{ error }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<div>
-				<div>
-					<label for="field.id_for_label">{{ form.image.label }}</label>
-					{{ form.image }}
-					<div>
-						<ul>
-							{% for error in form.image.errors %}
-								<li>{{ error }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div>
-					<button id="submit" type="submit">
-						Save
-					</button>
-				</div>
-			</div>
-		</div>
-	</form>
+    <div class="container">
+        <h1 class="group-title">Create a Group</h1>
+        <form id="create-group-form" method="post" action="{% url 'create-group' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="field.id_for_label" class="form-label">Group Name</label>
+                {{ form.name }}
+                <div class="error-list">
+                    <ul>
+                        {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <hr class="form-divider">
+            <div id="members-container" class="form-group">
+                <span class="members-heading">MEMBERS</span>
+                {{ form.members_fields_count }}
+                <div class="member-info">
+                    <span>{{ user.username }} ({{ user.email }})</span>
+                </div>
+                <br>
+                {% for field in form %}
+                    {% if field.name|startswith:"member_" %}
+                        <div id="{{ field.name }}-container" class="form-group">
+                            <div>
+                                <label for="{{ field.id_for_label }}" class="form-label">Member</label>
+                                {{ field }}
+                                <button id="remove-{{ field.name }}" data-field-name="{{ field.name }}" class="remove-btn red-btn">X</button>
+                                <div class="error-list">
+                                    <ul>
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button id="add-extra-member" class="green-btn">+ Add a person</button>
+            <hr class="form-divider">
+            <div class="form-group">
+                <label for="field.id_for_label" class="form-label">Group Type</label>
+                {{ form.type }}
+                <div class="error-list">
+                    <ul>
+                        {% for error in form.type.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <hr class="form-divider">
+            <div class="form-group">
+                <label for="field.id_for_label" class="form-label">Group Image</label>
+                {{ form.image }}
+                <div class="error-list">
+                    <ul>
+                        {% for error in form.image.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <button id="submit" type="submit" class="blue-btn">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block footer_refrences %}
-	<script src="{% static 'js/group-add-remove-member.js' %}"></script>
+    <script src="{% static 'js/group-add-remove-member.js' %}"></script>
 {% endblock %}
