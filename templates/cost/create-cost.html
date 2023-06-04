@@ -1,40 +1,40 @@
 {% extends "base.html" %}
 {% load static %}
-{% load startswith %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/cost.css' %}">
+{% endblock %}
 
 {% block title %}
-	Add an expense | Dungy
+    Add an expense | Splitwise
 {% endblock %}
 
 {% block content %}
-	<h1>Add an expense</h1>
-	<form id="create-cost-form" method="post" action="{% url 'create-cost' slug=request.resolver_match.kwargs.slug %}"
-		  enctype=multipart/form-data>
-		{% csrf_token %}
-		<div>
-			{% for field in form %}
-				<div>
-					<div>
-						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-						{{ field }}
-						<div>
-							<ul>
-								{% for error in field.errors %}
-									<li>{{ error }}</li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-			<div>
-				<div>
-					<button id="submit" type="submit">
-						Save
-					</button>
-				</div>
-			</div>
-		</div>
-	</form>
+    <div class="container">
+        <h1>Add an expense</h1>
+        <form id="create-cost-form" method="post" action="{% url 'create-cost' slug=request.resolver_match.kwargs.slug %}"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {% for field in form %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        </div>
+                        <div class="col-md-9">
+                            {{ field }}
+                            <ul class="error-list">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <button id="submit" type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
-
