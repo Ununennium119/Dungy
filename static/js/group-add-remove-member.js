@@ -20,13 +20,14 @@ function add_extra_member(e) {
     container.id = `${field_name}-container`;
 
     let element = document.createElement("div");
-    element.innerHTML += `<label for="id_${field_name}"></label>\n`;
+    element.innerHTML += `<label for="id_${field_name}" class="form-label">Member</label>\n`;
     element.innerHTML += `<input type="email" name="${field_name}" id="id_${field_name}" autocomplete="off">\n`;
 
     let remove_btn = document.createElement("button");
     remove_btn.id = `remove-${field_name}`;
     remove_btn.dataset.fieldName = `${field_name}`;
     remove_btn.innerHTML = "X";
+    remove_btn.classList.add("remove-btn", "red-btn"); // Add the necessary classes for styling
     element.append(remove_btn)
 
     element.innerHTML += "<div><ul></ul></div>\n"
