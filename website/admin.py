@@ -2,14 +2,13 @@ from django.contrib import admin
 from website.models import *
 
 
+class CostMemberInline(admin.StackedInline):
+    model = CostMember
+
+
 @admin.register(Cost)
 class CostAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Debt)
-class DebtAdmin(admin.ModelAdmin):
-    pass
+    inlines = [CostMemberInline]
 
 
 @admin.register(Group)

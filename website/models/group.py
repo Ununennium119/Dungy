@@ -2,7 +2,8 @@ import uuid
 
 from autoslug import AutoSlugField
 from django.db import models
-from .user import User
+
+from website.models import User
 
 
 class Group(models.Model):
