@@ -1,0 +1,56 @@
+/* CSS for headers */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* CSS for the friend list */
+.friend {
+  margin-bottom: 8px;
+}
+
+/* CSS for friend requests */
+.friend-request {
+  margin-bottom: 12px;
+}
+
+/* CSS for inline forms */
+.inline-form {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* CSS for buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-danger:hover {
+  opacity: 0.8;
+}

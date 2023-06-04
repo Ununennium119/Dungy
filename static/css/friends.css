@@ -1,0 +1,67 @@
+.container {
+    background-color: #ead8d8;
+    border: 1px solid #2154b7;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.splitwise-logo {
+    margin-bottom: 20px;
+}
+
+.splitwise-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.error-messages {
+    margin-top: 5px;
+    color: red;
+    text-align: left;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4;
+}

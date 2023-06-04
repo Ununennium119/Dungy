@@ -1,55 +1,57 @@
 {% extends "base.html" %}
 {% load static %}
-{% load startswith %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/friends_list.css' %}">
+{% endblock %}
 
 {% block title %}
-    Friends | Dungy
+    Friends | Splitwise
 {% endblock %}
 
 {% block content %}
-    <div>
+    <div class="container">
         <h2>Friends</h2>
         {% for friend in friends %}
-            <div>
+            <div class="friend">
                 <span>{{ friend.username }} ({{ friend.email }})</span>
             </div>
         {% endfor %}
 
         <h2>Sent Friend Requests</h2>
-        {% for frient_request in sent_friend_requests %}
-            <div>
+        {% for friend_request in sent_friend_requests %}
+            <div class="friend-request">
                 <span>
-                    Friend Request to {{ frient_request.receiver.username }} ({{ frient_request.receiver.email }})
+                    Friend Request to {{ friend_request.receiver.username }} ({{ friend_request.receiver.email }})
                 </span>
-                <form action="{% url "cancel-friend-request" %}" method="post" style="display: inline">
+                <form action="{% url 'cancel-friend-request' %}" method="post" class="inline-form">
                     {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ frient_request.receiver.username }}">
-                    <button type="submit">Cancel</button>
+                    <input type="hidden" name="username" value="{{ friend_request.receiver.username }}">
+                    <button type="submit" class="btn btn-secondary">Cancel</button>
                 </form>
             </div>
         {% endfor %}
 
         <h2>Received Friend Requests</h2>
-        {% for frient_request in received_friend_requests %}
-            <div>
+        {% for friend_request in received_friend_requests %}
+            <div class="friend-request">
                 <span>
-                    Friend Request from {{ frient_request.sender.username }} ({{ frient_request.sender.email }})
+                    Friend Request from {{ friend_request.sender.username }} ({{ friend_request.sender.email }})
                 </span>
-                <form action="{% url "accept-friend-request" %}" method="post" style="display: inline">
+                <form action="{% url 'accept-friend-request' %}" method="post" class="inline-form">
                     {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ frient_request.sender.username }}">
-                    <button type="submit">Accept</button>
+                    <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
+                    <button type="submit" class="btn btn-primary">Accept</button>
                 </form>
-                <form action="{% url "reject-friend-request" %}" method="post" style="display: inline">
+                <form action="{% url 'reject-friend-request' %}" method="post" class="inline-form">
                     {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ frient_request.sender.username }}">
-                    <button type="submit">Reject</button>
+                    <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
+                    <button type="submit" class="btn btn-danger">Reject</button>
                 </form>
             </div>
         {% endfor %}
 
         <br>
-        <a href="{% url "add-friend" %}">Add Friend</a>
+        <a href="{% url 'add-friend' %}" class="btn btn-primary">Add Friend</a>
     </div>
 {% endblock %}
-
