@@ -1,33 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
-{% load startswith %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/group_page.css' %}">
+{% endblock %}
 
 {% block title %}
     {{ object.name }} | Dungy
 {% endblock %}
 
 {% block content %}
-    <h1>{{ object.name }}</h1>
-    <hr>
-    <a href="{% url 'dashboard' %}">Dashboard</a>
-    <hr>
-    <div>
-        <h2>Expenses</h2>
-        {% for cost in costs %}
-            <div>
-                <span>{{ cost.date }}</span>
-                <br>
-                <span>{{ cost.description }}</span>
-                <br>
-                <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
-                <br>
-                <br>
-            </div>
-        {% endfor %}
-    </div>
-    <a href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
-    <br>
-    <div>
+    <header>
+        <h1>{{ object.name }}</h1>
+    </header>
+    <div class="sidebar">
         <form action="{% url 'single-group' slug=object.slug %}" method="get">
             <label for="archived-input">Archived</label>
             <input id="archived-input" name="archived" type="checkbox" {% if archived %}checked{% endif %}/>
@@ -40,6 +26,28 @@
             </button>
         </form>
     </div>
+
+    <div class="expense_section">
+        <h2>Expenses</h2>
+        {% for cost in costs %}
+            <div>
+                <span>{{ cost.date }}</span>
+                <br>
+                <span>{{ cost.description }}</span>
+                <br>
+                <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
+                <br>
+                <br>
+            </div>
+        {% endfor %}
+        <a class="btn btn-primary" href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
+    </div>
+
+     <div class="profile-menu">
+         <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
+    </div>
+
+
 {% endblock %}
 
 {% block footer_refrences %}
