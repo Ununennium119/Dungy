@@ -15,20 +15,42 @@
         <h2>Expenses</h2>
         {% for cost in costs %}
             <div>
-                <span>{{ cost.date }}</span>
-                <br>
-                <span>{{ cost.description }}</span>
-                <br>
-                <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
-                <br>
+                <a href="{% url 'single-cost' group_slug=object.slug pk=cost.id %}">
+                    <span>{{ cost.description }}</span>
+                    <br>
+                    <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
+                    <br>
+                    <span>{{ cost.date }}</span>
+                    <br>
+                </a>
                 <br>
             </div>
         {% endfor %}
     </div>
-    <a href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
-    <br>
     <div>
         <form action="{% url 'single-group' slug=object.slug %}" method="get">
+            <label for="sort-by">Sort By</label>
+            <select id="sort-by" name="sort-by">
+                <option value="oldest" {% if sort_by == 'oldest' %}selected=""{% endif %}>
+                    Oldest
+                </option>
+                <option value="newest" {% if sort_by == 'newest' %}selected=""{% endif %}>
+                    Newest
+                </option>
+                <option value="amount-asc" {% if sort_by == 'amount-asc' %}selected=""{% endif %}>
+                    Amount &#8593
+                </option>
+                <option value="amount-desc" {% if sort_by == 'amount-desc' %}selected=""{% endif %}>
+                    Amount &#8595
+                </option>
+                <option value="description-asc" {% if sort_by == 'description-asc' %}selected=""{% endif %}>
+                    Description &#8593
+                </option>
+                <option value="description-desc" {% if sort_by == 'description-desc' %}selected=""{% endif %}>
+                    Description &#8595
+                </option>
+            </select>
+            <br>
             <label for="archived-input">Archived</label>
             <input id="archived-input" name="archived" type="checkbox" {% if archived %}checked{% endif %}/>
             <br>
@@ -40,6 +62,8 @@
             </button>
         </form>
     </div>
+    <br>
+    <a href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
 {% endblock %}
 
 {% block footer_refrences %}

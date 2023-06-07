@@ -10,6 +10,56 @@ from website.models import User, FriendRequest
 
 
 @method_decorator(login_required, name='dispatch')
+class FriendListView(TemplateView):
+    template_name = 'friend/friend-list.html'
+
+    friends_sort_dict = {
+        'username-asc': 'username',
+        'username-desc': '-username',
+        'email-asc': 'email',
+        'email-desc': '-email'
+    }
+    sent_request_sort_dict = {
+        'oldest': 'date_time',
+        'newest': '-date_time',
+        'username-asc': 'receiver__username',
+        'username-desc': '-receiver__username',
+        'email-asc': 'receiver__email',
+        'email-desc': '-receiver__email'
+    }
+    received_request_sort_dict = {
+        'oldest': 'date_time',
+        'newest': '-date_time',
+        'username-asc': 'sender__username',
+        'username-desc': '-sender__username',
+        'email-asc': 'sender__email',
+        'email-desc': '-sender__email'
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super(FriendListView, self).get_context_data(**kwargs)
+
+        user = User.objects.get(id=self.request.user.id)
+
+        friends_sort_by = self.request.GET.get('friends-sort-by', 'username-asc')
+        context['friends_sort_by'] = friends_sort_by
+        friends_sort_by = self.friends_sort_dict.get(friends_sort_by, 'username')
+        context['friends'] = user.friends.order_by(friends_sort_by)
+
+        sent_sort_by = self.request.GET.get('sent-sort-by', 'oldest')
+        context['sent_sort_by'] = sent_sort_by
+        sent_sort_by = self.sent_request_sort_dict.get(sent_sort_by, 'date_time')
+        context['sent_friend_requests'] = user.sent_friend_requests_set.order_by(sent_sort_by)
+
+        received_sort_by = self.request.GET.get('received-sort-by', 'oldest')
+        context['received_sort_by'] = received_sort_by
+        received_sort_by = self.received_request_sort_dict.get(received_sort_by, 'date_time')
+        context['received_friend_requests'] = user.received_friend_requests_set.order_by(received_sort_by)
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
 class FriendRequestCreationView(FormView):
     template_name = 'friend/create-friend-request.html'
     form_class = FriendRequestCreationForm
@@ -40,20 +90,6 @@ class FriendRequestCreationView(FormView):
 
         context['form'] = form
         return render(request, self.template_name, context)
-
-
-@method_decorator(login_required, name='dispatch')
-class FriendListView(TemplateView):
-    template_name = 'friend/friend-list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(FriendListView, self).get_context_data(**kwargs)
-
-        user = User.objects.get(id=self.request.user.id)
-        context['friends'] = user.friends.all()
-        context['sent_friend_requests'] = user.sent_friend_requests_set.all()
-        context['received_friend_requests'] = user.received_friend_requests_set.all()
-        return context
 
 
 @method_decorator(login_required, name='dispatch')

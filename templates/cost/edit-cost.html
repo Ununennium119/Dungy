@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% load startswith %}
+
+{% block title %}
+	Add an expense | Dungy
+{% endblock %}
+
+{% block content %}
+	<h1>Add an expense</h1>
+	<form id="edit-cost-form" method="post"
+          action="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}"
+		  enctype=multipart/form-data>
+		{% csrf_token %}
+		<div>
+			{% for field in form %}
+				<div>
+					<div>
+						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+						{{ field }}
+						<div>
+							<ul>
+								{% for error in field.errors %}
+									<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div>
+				<div>
+					<button id="submit" type="submit">
+						Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+    <a href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}">Cancel</a>
+{% endblock %}

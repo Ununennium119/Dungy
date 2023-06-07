@@ -48,6 +48,15 @@ class GroupDetailView(DetailView):
     model = Group
     template_name = 'group/single-group.html'
 
+    sort_dict = {
+        'oldest': 'date',
+        'newest': '-date',
+        'description-asc': 'description',
+        'description-desc': '-description',
+        'amount-asc': 'amount',
+        'amount-desc': '-amount'
+    }
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         group: Group = self.object
@@ -56,10 +65,17 @@ class GroupDetailView(DetailView):
         if not group.members.filter(id=user_id).exists():
             raise PermissionDenied()
 
+        sort_by = self.request.GET.get('sort-by', 'oldest')
+        context['sort_by'] = sort_by
+        sort_by = self.sort_dict.get(sort_by, 'oldest')
+
         archived = self.request.GET.get('archived', 'off') == 'on'
-        paid = self.request.GET.get('paid', 'off') == 'on'
-        context['costs'] = group.costs_set.filter(archived=archived, paid_by__isnull=not paid)
         context['archived'] = archived
+
+        paid = self.request.GET.get('paid', 'off') == 'on'
         context['paid'] = paid
+
+        context['costs'] = group.costs_set.filter(archived=archived, members_set__user__id=user_id,
+                                                  members_set__paid=paid).order_by(sort_by)
 
         return context

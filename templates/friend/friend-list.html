@@ -14,7 +14,7 @@
                 <span>{{ friend.username }} ({{ friend.email }})</span>
             </div>
         {% endfor %}
-
+        <hr>
         <h2>Sent Friend Requests</h2>
         {% for frient_request in sent_friend_requests %}
             <div>
@@ -28,7 +28,7 @@
                 </form>
             </div>
         {% endfor %}
-
+        <hr>
         <h2>Received Friend Requests</h2>
         {% for frient_request in received_friend_requests %}
             <div>
@@ -47,9 +47,74 @@
                 </form>
             </div>
         {% endfor %}
-
+        <hr>
+        <form id="sort-form" method="get" action="{% url 'friends-list' %}">
+            <label for="friends-sort-by">Sort Friends By</label>
+            <select id="friends-sort-by" name="friends-sort-by">
+                <option value="username-asc" {% if friends_sort_by == 'username-asc' %}selected=""{% endif %}>
+                    Username &#8593
+                </option>
+                <option value="username-desc" {% if friends_sort_by == 'username-desc' %}selected=""{% endif %}>
+                    Username &#8595
+                </option>
+                <option value="email-asc" {% if friends_sort_by == 'email-asc' %}selected=""{% endif %}>
+                    Email &#8593
+                </option>
+                <option value="email-desc" {% if friends_sort_by == 'email-desc' %}selected=""{% endif %}>
+                    Email &#8595
+                </option>
+            </select>
+            <br>
+            <label for="sent-sort-by">Sort Sent Friend Requests By</label>
+            <select id="sent-sort-by" name="sent-sort-by">
+                <option value="oldest" {% if sent_sort_by == 'oldest' %}selected=""{% endif %}>
+                    Oldest
+                </option>
+                <option value="newest" {% if sent_sort_by == 'newest' %}selected=""{% endif %}>
+                    Newest
+                </option>
+                <option value="username-asc" {% if sent_sort_by == 'username-asc' %}selected=""{% endif %}>
+                    Username &#8593
+                </option>
+                <option value="username-desc" {% if sent_sort_by == 'username-desc' %}selected=""{% endif %}>
+                    Username &#8595
+                </option>
+                <option value="email-asc" {% if sent_sort_by == 'email-asc' %}selected=""{% endif %}>
+                    Email &#8593
+                </option>
+                <option value="email-desc" {% if sent_sort_by == 'email-desc' %}selected=""{% endif %}>
+                    Email &#8595
+                </option>
+            </select>
+            <br>
+            <label for="received-sort-by">Sort Received Friend Requests By</label>
+            <select id="received-sort-by" name="received-sort-by">
+                <option value="oldest" {% if received_sort_by == 'oldest' %}selected=""{% endif %}>
+                    Oldest
+                </option>
+                <option value="newest" {% if received_sort_by == 'newest' %}selected=""{% endif %}>
+                    Newest
+                </option>
+                <option value="username-asc" {% if received_sort_by == 'username-asc' %}selected=""{% endif %}>
+                    Username &#8593
+                </option>
+                <option value="username-desc" {% if received_sort_by == 'username-desc' %}selected=""{% endif %}>
+                    Username &#8595
+                </option>
+                <option value="email-asc" {% if received_sort_by == 'email-asc' %}selected=""{% endif %}>
+                    Email &#8593
+                </option>
+                <option value="email-desc" {% if received_sort_by == 'email-desc' %}selected=""{% endif %}>
+                    Email &#8595
+                </option>
+            </select>
+            <br>
+            <button type="submit">Apply</button>
+        </form>
         <br>
         <a href="{% url "add-friend" %}">Add Friend</a>
+        <br>
+        <a href="{% url "dashboard" %}">Back</a>
     </div>
 {% endblock %}
 
