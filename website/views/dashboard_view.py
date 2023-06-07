@@ -15,7 +15,12 @@ class DashboardView(TemplateView):
         user = User.objects.get(id=self.request.user.id)
         context['username'] = user.username
         context['groups'] = user.group_set.all().prefetch_related('costs_set')
-        context['owe'] = user.debt
-        context['owed'] = user.credit
-        context['total_balance'] = context['owed'] - context['owe']
+        if user.debt and user.credit:
+            context['owe'] = user.debt
+            context['owed'] = user.credit
+            context['total_balance'] = context['owed'] - context['owe']
+        else:
+            context['owe'] = 0.0
+            context['owed'] = 0.0
+            context['total_balance'] = 0.0
         return context

@@ -1,33 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
-{% load startswith %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/group_page.css' %}">
+{% endblock %}
 
 {% block title %}
     {{ object.name }} | Dungy
 {% endblock %}
 
 {% block content %}
-    <h1>{{ object.name }}</h1>
-    <hr>
-    <a href="{% url 'dashboard' %}">Dashboard</a>
-    <hr>
-    <div>
-        <h2>Expenses</h2>
-        {% for cost in costs %}
-            <div>
-                <a href="{% url 'single-cost' group_slug=object.slug pk=cost.id %}">
-                    <span>{{ cost.description }}</span>
-                    <br>
-                    <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
-                    <br>
-                    <span>{{ cost.date }}</span>
-                    <br>
-                </a>
-                <br>
-            </div>
-        {% endfor %}
-    </div>
-    <div>
+    <header>
+        <h1>{{ object.name }}</h1>
+    </header>
+    <div class="sidebar">
         <form action="{% url 'single-group' slug=object.slug %}" method="get">
             <label for="sort-by">Sort By</label>
             <select id="sort-by" name="sort-by">
@@ -62,8 +48,26 @@
             </button>
         </form>
     </div>
-    <br>
-    <a href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
+
+    <div class="expense_section">
+        <h2>Expenses</h2>
+        {% for cost in costs %}
+            <div>
+                <span>{{ cost.date }}</span>
+                <br>
+                <span>{{ cost.description }}</span>
+                <br>
+                <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
+                <br>
+                <br>
+            </div>
+        {% endfor %}
+        <a class="btn btn-primary" href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
+    </div>
+
+     <div class="profile-menu">
+         <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
+    </div>
 {% endblock %}
 
 {% block footer_refrences %}
