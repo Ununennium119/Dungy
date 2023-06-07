@@ -17,11 +17,11 @@
         <form action="{% url 'single-group' slug=object.slug %}" method="get">
             <label for="sort-by">Sort By</label>
             <select id="sort-by" name="sort-by">
-                <option value="oldest" {% if sort_by == 'oldest' %}selected=""{% endif %}>
-                    Oldest
-                </option>
                 <option value="newest" {% if sort_by == 'newest' %}selected=""{% endif %}>
                     Newest
+                </option>
+                <option value="oldest" {% if sort_by == 'oldest' %}selected=""{% endif %}>
+                    Oldest
                 </option>
                 <option value="amount-asc" {% if sort_by == 'amount-asc' %}selected=""{% endif %}>
                     Amount &#8593
@@ -40,8 +40,12 @@
             <label for="archived-input">Archived</label>
             <input id="archived-input" name="archived" type="checkbox" {% if archived %}checked{% endif %}/>
             <br>
+            <label for="only-input">Only My Costs</label>
+            <input id="only-input" name="only" type="checkbox" {% if only %}checked{% endif %}/>
+            <br>
             <label for="paid-input">Paid</label>
-            <input id="paid-input" name="paid" type="checkbox" {% if paid %}checked{% endif %}/>
+            <input id="paid-input" name="paid" type="checkbox" {% if paid %}checked{% endif %}
+                   {% if not only %}disabled{% endif %}/>
             <br>
             <button id="submit-filter" type="submit">
                 Filter
@@ -59,14 +63,16 @@
                 <br>
                 <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
                 <br>
+                <a href="{% url 'single-cost' group_slug=cost.group.slug pk=cost.id %}">View</a>
+                <br>
                 <br>
             </div>
         {% endfor %}
         <a class="btn btn-primary" href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
     </div>
 
-     <div class="profile-menu">
-         <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
+    <div class="profile-menu">
+        <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
     </div>
 {% endblock %}
 

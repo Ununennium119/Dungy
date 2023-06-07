@@ -1,7 +1,5 @@
 from django.urls import path
-from website.views import HomeView, RegisterView, LoginView, LogoutView, DashboardView, GroupCreationView, \
-    GroupDetailView, CostCreationView, CostDetailView, CostUpdateView, CostDeleteView, FriendRequestCreationView, \
-    FriendListView, FriendRequestCancelView, FriendRequestAcceptView, FriendRequestRejectView
+from website.views import *
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -20,4 +18,8 @@ urlpatterns = [
     path('groups/<slug:group_slug>/costs/<uuid:pk>/', CostDetailView.as_view(), name='single-cost'),
     path('groups/<slug:group_slug>/costs/<uuid:pk>/edit/', CostUpdateView.as_view(), name='edit-cost'),
     path('groups/<slug:group_slug>/costs/<uuid:pk>/delete/', CostDeleteView.as_view(), name='delete-cost'),
+    path('groups/<slug:group_slug>/costs/<uuid:pk>/confirm-payment/', CostConfirmPaymentView.as_view(),
+         name='confirm-cost-payment'),
+    path('groups/<slug:group_slug>/costs/<uuid:pk>/pay/', CostPay.as_view(),
+         name='pay-cost'),
 ]

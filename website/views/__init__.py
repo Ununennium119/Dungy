@@ -6,4 +6,4 @@ from .dashboard_view import DashboardView
 from .friend_view import FriendRequestCreationView, FriendListView, FriendRequestCancelView, FriendRequestAcceptView, \
     FriendRequestRejectView
 from .group_view import GroupCreationView, GroupDetailView
-from .cost_view import CostCreationView, CostDetailView, CostUpdateView, CostDeleteView
+from .cost_view import CostCreationView, CostDetailView, CostUpdateView, CostDeleteView, CostConfirmPaymentView, CostPay

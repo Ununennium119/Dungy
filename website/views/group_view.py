@@ -65,9 +65,9 @@ class GroupDetailView(DetailView):
         if not group.members.filter(id=user_id).exists():
             raise PermissionDenied()
 
-        sort_by = self.request.GET.get('sort-by', 'oldest')
+        sort_by = self.request.GET.get('sort-by', 'newest')
         context['sort_by'] = sort_by
-        sort_by = self.sort_dict.get(sort_by, 'oldest')
+        sort_by = self.sort_dict.get(sort_by, '-date')
 
         archived = self.request.GET.get('archived', 'off') == 'on'
         context['archived'] = archived
@@ -75,7 +75,13 @@ class GroupDetailView(DetailView):
         paid = self.request.GET.get('paid', 'off') == 'on'
         context['paid'] = paid
 
-        context['costs'] = group.costs_set.filter(archived=archived, members_set__user__id=user_id,
-                                                  members_set__paid=paid).order_by(sort_by)
+        only = self.request.GET.get('only', 'off') == 'on'
+        context['only'] = only
+
+        if only:
+            context['costs'] = group.costs_set.filter(archived=archived, members_set__user__id=user_id,
+                                                      members_set__paid=paid).order_by(sort_by)
+        else:
+            context['costs'] = group.costs_set.filter(archived=archived).order_by(sort_by)
 
         return context
