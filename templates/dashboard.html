@@ -15,59 +15,77 @@
     </header>
 
     <div class="container">
+        <div class="row text-center">
+            <div id="balance-card" class="col-4 offset-4 bg-dark rounded-5">
+                <h3 class="text-light">Balance: {{ user.balance }} Toman</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <div class="dashboard-section">
-            <h2>Your Balances</h2>
             <div class="balances">
                 <div class="balance-card text-danger">
-                    <h3>You Owe</h3>
-                    <p>${{ owe }}</p>
+                    <h3 class="fw-bold">You Owe</h3>
+                    <hr>
+                    <p>{{ owe }} Toman</p>
                 </div>
                 <div class="balance-card text-success">
-                    <h3>You Are Owed</h3>
-                    <p>${{ owed }}</p>
+                    <h3 class="fw-bold">You Are Owed</h3>
+                    <hr>
+                    <p>{{ owed }} Toman</p>
                 </div>
                 <div class="balance-card text-primary">
-                    <h3>Total Balance</h3>
-                    <p>${{ total_balance }}</p>
+                    <h3 class="fw-bold">Total</h3>
+                    <hr>
+                    <p>{{ total_balance }} Toman</p>
                 </div>
             </div>
         </div>
 
         <div class="table-container">
-            <div>
-                <div class="table-owe">
-                    <h2>Owe</h2>
+            <div class="row">
+                <div class="table-owe col-4">
+                    <h2 class="text-danger">Owe</h2>
                     <table id="table1">
                         <tbody id="table-body">
                         {% for cost in owe_costs %}
                             <tr>
-                                {{ cost.amount }}
+                                <td>
+                                    <a href="{% url 'single-cost' group_slug=cost.group.slug pk=cost.id %}">
+                                        {{ cost.description }}
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <div class="table-owed">
-                    <h2>owed</h2>
+                <div class="table-owed col-4">
+                    <h2 class="text-success">Owed</h2>
                     <table id="table2">
                         <tbody id="table-body">
                         {% for cost in owed_costs %}
                             <tr>
-                                {{ cost.amount }}
+                                <td>
+                                    <a href="{% url 'single-cost' group_slug=cost.group.slug pk=cost.id %}">
+                                        {{ cost.description }}
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <div class="table-groups">
-                    <label>groups</label>
+                <div class="table-groups col-4">
+                    <h2 class="text-primary">Groups</h2>
                     <table id="table3">
                         <tbody id="table-body">
                         {% for group in groups %}
                             <tr>
-                                <th>
+                                <td>
                                     <a href="{% url "single-group" slug=group.slug %}">{{ group.name }}</a>
-                                </th>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

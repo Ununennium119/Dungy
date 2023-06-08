@@ -151,24 +151,17 @@ footer {
 }
 
 .table-owe {
-    width: 45%;
-    float: right;
-    right: 0;
-    color: green;
     text-align: center;
 }
 
 .table-owed {
-    width: 40%;
-    float: right;
-    right: 0;
-    color: green;
     text-align: center;
 }
 
 .table-groups {
-    width: 5%;
-    float: left;
-    left: 0;
-    color: red;
+    text-align: center;
+}
+
+#balance-card {
+    padding: 20px;
 }
