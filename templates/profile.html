@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/login-register.css' %}">
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="body">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                {% if error %}
+                    <div class="errorlist">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn">Edit</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
