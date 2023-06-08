@@ -35,23 +35,44 @@
 
         <div class="table-container">
             <div>
-                <h2>Expenses/Groups</h2>
-                <table id="table">
-                    <tbody id="table-body">
-                    {% for group in groups %}
-                        <tr>
-                            <th>
-                                <a href="{% url "single-group" slug=group.slug %}">{{ group.name }}</a>
-                            </th>
-                            {% for cost in group.costs_set.all %}
-                                <td>
-                                    {{ cost.description }}, {{ cost.amount }}
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-owe">
+                    <h2>Owe</h2>
+                    <table id="table1">
+                        <tbody id="table-body">
+                        {% for cost in owe_costs %}
+                            <tr>
+                                {{ cost.amount }}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-owed">
+                    <h2>owed</h2>
+                    <table id="table2">
+                        <tbody id="table-body">
+                        {% for cost in owed_costs %}
+                            <tr>
+                                {{ cost.amount }}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-groups">
+                    <label>groups</label>
+                    <table id="table3">
+                        <tbody id="table-body">
+                        {% for group in groups %}
+                            <tr>
+                                <th>
+                                    <a href="{% url "single-group" slug=group.slug %}">{{ group.name }}</a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -70,11 +91,6 @@
         <a class="profile-button" href={% url "friends-list" %}>Friends</a>
     </div>
 
-    <footer>
-        <div class="container">
-            &copy; 2023 Splitwise. All rights reserved.
-        </div>
-    </footer>
 {% endblock %}
 
 {% block footer_refrences %}
