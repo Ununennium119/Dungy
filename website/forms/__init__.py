@@ -4,3 +4,4 @@ from .friend_request_creation_form import FriendRequestCreationForm
 from .group_creation_form import GroupCreationForm
 from .cost_creation_form import CostCreationForm
 from .cost_update_form import CostUpdateForm
+from .increase_balance_form import IncreaseBalanceForm

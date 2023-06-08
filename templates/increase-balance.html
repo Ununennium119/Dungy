@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Increase balance | Dungy
+{% endblock %}
+
+{% block content %}
+    <h2>Increase Balance</h2>
+    <form method="post" action="{% url 'increase-balance' %}">
+        {% csrf_token %}
+        {% for field in form %}
+            <label id="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        {% endfor %}
+        <button type="submit">Increase Balance</button>
+    </form>
+{% endblock %}

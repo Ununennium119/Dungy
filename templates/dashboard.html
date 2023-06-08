@@ -57,9 +57,11 @@
     </div>
 
     <div class="profile-menu">
-        <a class="profile-button" href="/profile">{{ username }}</a>
+        <a class="profile-button" href="{% url 'profile' %}">{{ username }}</a>
         <br>
-        <a class="profile-button" href="/logout">Logout</a>
+        <a class="profile-button" href="{% url 'logout' %}">Logout</a>
+        <br>
+        <a class="profile-button" href="{% url 'increase-balance' %}">Increase Balance</a>
     </div>
 
     <div class="function-menu">

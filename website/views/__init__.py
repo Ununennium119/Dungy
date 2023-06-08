@@ -7,3 +7,4 @@ from .friend_view import FriendRequestCreationView, FriendListView, FriendReques
     FriendRequestRejectView
 from .group_view import GroupCreationView, GroupDetailView
 from .cost_view import CostCreationView, CostDetailView, CostUpdateView, CostDeleteView, CostConfirmPaymentView, CostPay
+from .balance_view import IncreaseBalanceView
