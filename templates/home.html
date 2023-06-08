@@ -1,8 +1,50 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block title %}Dungy{% endblock %}
 
 {% block content %}
-    <h2>Home</h2>
-    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <div>
+        <header>Home</header>
+        <div class="header-menu">
+            <div>
+                <a class="links" href="{% url 'dashboard' %}">Dashboard</a>
+            </div>
+            <div>
+                <a class="links" href="{% url 'register' %}">Sign Up</a>
+            </div>
+        </div>
+        <div class="logo">
+            <a href="{% url 'home' %}"><img class="image" src="../static/images/splitwise_logo.jpg"> </a>
+        </div>
+    </div>
+    <body>
+    <div class="stats">
+        <label class="item-head">Stats</label>
+        <br>
+        <label class="item-stat">User counts: {{ users_count }}</label>
+        <br>
+        <label class="item-stat">Groups: {{ groups_count }}</label>
+        <br>
+        <label class="item-stat">Costs: {{ costs }}</label>
+        <br>
+        <label class="item-stat">Transactions: {{ transactions }}</label>
+    </div>
+    <div class="rules">
+        <label class="item-head">Rules:</label>
+        <br>
+        <label class="item-stat">a to pickup the phone</label>
+        <br>
+        <label class="item-stat">b you'll never seen</label>
+    </div>
+    </body>
+    <footer>
+        made in iran
+        <br>
+        contact with us: +98999999 * email: salam@gmail.com
+    </footer>
 {% endblock %}
