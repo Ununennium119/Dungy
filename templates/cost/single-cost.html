@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/cost.css' %}">
+{% endblock %}
 
 {% block title %}{{ object.description }} | Dungy{% endblock %}
 
 {% block content %}
     <h2>{{ object.description }}</h2>
+    <body>
     {% if object.image %}
-        <img src="{{ object.image.url }}" alt="Expense Image">
+        <img src="{{ object.image.url }}" alt="Expense Image" width="50px" height="50px">
         <br>
         <br>
     {% endif %}
@@ -24,16 +30,13 @@
         <span>Notes:</span>
         <p>{{ object.note }}</p>
     {% endif %}
-    <br>
-    <br>
-    <a href="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}">Edit</a>
-    <br>
-    <a href="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">Delete</a>
-    <br>
-    <a href="{% url 'single-group' slug=object.group.slug %}">Back</a>
-    <br>
-    {% if not is_paid %}
-        <a href="{% url 'confirm-cost-payment' group_slug=object.group.slug pk=object.id %}">Pay</a>
-    {% endif %}
-
+    <div class="cost-actions">
+        <a href="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}">Edit</a>
+        <a href="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">Delete</a>
+        <a href="{% url 'single-group' slug=object.group.slug %}">Back</a>
+        {% if not is_paid %}
+            <a href="{% url 'confirm-cost-payment' group_slug=object.group.slug pk=object.id %}">Pay</a>
+        {% endif %}
+    </div>
+    </body>
 {% endblock %}

@@ -17,6 +17,12 @@ class IncreaseBalanceView(SuccessMessageMixin, FormView):
     success_url = reverse_lazy('dashboard')
     success_message = 'Balance increased successfully!'
 
+    def get_context_data(self, **kwargs):
+        user = User.objects.get(id=self.request.user.id)
+        contex = super(IncreaseBalanceView, self).get_context_data()
+        contex['balance'] = user.balance
+        return contex
+
     def form_valid(self, form):
         amount = form.cleaned_data['amount']
         user = User.objects.get(id=self.request.user.id)
