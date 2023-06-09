@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/cost.css' %}">
+{% endblock %}
 {% block title %}Delete Cost | Dungy{% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">
-        {% csrf_token %}
-        <p>Are you sure you want to delete "{{ object.description }}" in group "{{ object.group.name }}"?</p>
-        <input type="submit" value="Confirm">
-        <a href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}">Back</a>
-    </form>
+    <body>
+    <div class="question-box">
+        <form method="post" action="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">
+            {% csrf_token %}
+            <p>Are you sure you want to delete <strong>{{ object.description }}</strong> in group <strong>{{ object.group.name }}</strong>?</p>
+            <input class="delete-cost" type="submit" value="Confirm">
+            <a class="confirm-pay" href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}">Back</a>
+        </form>
+    </div>
+    </body>
 {% endblock %}

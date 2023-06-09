@@ -91,3 +91,38 @@ span {
     font-size: large;
     padding: 10px;
 }
+
+.question-box {
+    text-align: center;
+    margin-top: 25%;
+    color: blue;
+    font-size: x-large;
+}
+
+.cancel-pay {
+    color: red;
+}
+
+.cancel-pay:hover {
+    color: darkred;
+}
+
+.confirm-pay {
+    color: limegreen;
+}
+
+.confirm-pay:hover {
+    color: darkgreen
+}
+
+.delete-cost {
+    color: red;
+    background-color: #e6dbb9;
+    border: none;
+}
+
+.delete-cost:hover {
+    border-radius: 15px;
+    background-color: darkred;
+    border: 3px solid darkred;
+}
