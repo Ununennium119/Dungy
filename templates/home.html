@@ -8,43 +8,72 @@
 {% block title %}Dungy{% endblock %}
 
 {% block content %}
-    <div>
-        <header>Home</header>
-        <div class="header-menu">
-            <div>
-                <a class="links" href="{% url 'dashboard' %}">Dashboard</a>
-            </div>
-            <div>
-                <a class="links" href="{% url 'register' %}">Sign Up</a>
+    <header>
+        <div class="container">
+            <h1>Dungy</h1>
+        </div>
+    </header>
+
+    <div class="container2">
+        <div class="row text-center">
+            <div class="stats">
+                <label class="item-head">Stats</label>
+                <br>
+                <table>
+                    <tr>
+                        <td>User counts</td>
+                        <td>Groups</td>
+                        <td>Costs</td>
+                        <td>Transactions</td>
+                    </tr>
+                    <tr>
+                        <td>{{ users_count }}</td>
+                        <td>{{ groups_count }}</td>
+                        <td>{{ costs }}</td>
+                        <td>{{ transactions }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div class="logo">
-            <a href="{% url 'home' %}"><img class="image" src="../static/images/splitwise_logo.jpg"> </a>
-        </div>
     </div>
-    <body>
-    <div class="stats">
-        <label class="item-head">Stats</label>
-        <br>
-        <label class="item-stat">User counts: {{ users_count }}</label>
-        <br>
-        <label class="item-stat">Groups: {{ groups_count }}</label>
-        <br>
-        <label class="item-stat">Costs: {{ costs }}</label>
-        <br>
-        <label class="item-stat">Transactions: {{ transactions }}</label>
-    </div>
-    <div class="rules">
-        <label class="item-head">Rules:</label>
+
+    <div class="container3">
+        <label class="item-head">Rules</label>
         <br>
         <label class="item-stat">a to pickup the phone</label>
         <br>
         <label class="item-stat">b you'll never seen</label>
     </div>
-    </body>
+
+    <div class="container4">
+        <label class="item-head">About Us</label>
+        <br>
+        <label class="item-stat">a to pickup the phone</label>
+        <br>
+        <label class="item-stat">b you'll never seen</label>
+    </div>
+    <div class="profile-menu">
+        <a href="{% url 'home' %}"><img style="height: 40px; width: 40px" class="image"
+                                        src="../static/images/splitwise_logo.jpg"> </a>
+    </div>
+
+    <div class="function-menu">
+        <div>
+            <a class="links" href="{% url 'dashboard' %}">Dashboard</a>
+        </div>
+        <div>
+            <a class="links" href="{% url 'register' %}">Sign Up</a>
+        </div>
+    </div>
+
     <footer>
         made in iran
         <br>
         contact with us: +98999999 * email: salam@gmail.com
     </footer>
+
+{% endblock %}
+
+{% block footer_refrences %}
+    <script src="{% static "js/dashboard.js" %}"></script>
 {% endblock %}
