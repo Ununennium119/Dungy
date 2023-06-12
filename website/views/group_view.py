@@ -78,10 +78,11 @@ class GroupDetailView(DetailView):
         only = self.request.GET.get('only', 'off') == 'on'
         context['only'] = only
 
+        user = User.objects.get(id=user_id)
+        context['username'] = user.username
         if only:
             context['costs'] = group.costs_set.filter(archived=archived, members_set__user__id=user_id,
                                                       members_set__paid=paid).order_by(sort_by)
         else:
             context['costs'] = group.costs_set.filter(archived=archived).order_by(sort_by)
-
         return context

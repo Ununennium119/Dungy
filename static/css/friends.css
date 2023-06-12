@@ -65,3 +65,17 @@ h1 {
     border: none;
     border-radius: 4;
 }
+
+
+.link {
+    color: black;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.link:hover {
+    border-radius: 15px;
+    background-color: lightgray;
+    border: 3px solid lightgray;
+}

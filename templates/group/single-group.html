@@ -55,24 +55,33 @@
 
     <div class="expense_section">
         <h2>Expenses</h2>
-        {% for cost in costs %}
-            <div>
-                <span>{{ cost.date }}</span>
-                <br>
-                <span>{{ cost.description }}</span>
-                <br>
-                <span>{{ cost.paid_by.username }} paid {{ cost.amount }} Toman</span>
-                <br>
-                <a href="{% url 'single-cost' group_slug=cost.group.slug pk=cost.id %}">View</a>
-                <br>
-                <br>
-            </div>
-        {% endfor %}
-        <a class="btn btn-primary" href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
+        <table class="table-costs">
+            <tr>
+                <td><b>date</b></td>
+                <td><b>description</b></td>
+                <td><b>paid by</b></td>
+                <td><b>amount</b></td>
+                <td></td>
+            </tr>
+            {% for cost in costs %}
+                <tr  {% if cost.paid_by.username == username %}
+                    style="background-color: lightgreen;"
+                {% endif %} >
+                    <td>{{ cost.date }}</td>
+                    <td>{{ cost.description }}</td>
+                    <td>{{ cost.paid_by.username }}</td>
+                    <td>{{ cost.amount }} Toman</td>
+                    <td><a href="{% url 'single-cost' group_slug=cost.group.slug pk=cost.id %}">View</a></td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 
     <div class="profile-menu">
         <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
+        <br>
+        <a class="profile-button" href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
+
     </div>
 {% endblock %}
 
