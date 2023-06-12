@@ -10,21 +10,26 @@
 {% endblock %}
 
 {% block content %}
-    <header>Wallet</header>
-    <body>
-    <div class="balance-report">
-        <label>your balance = {{ balance }} Toman</label>
+    <div class="container">
+        <div class="splitwise-logo">
+            <img height="100p" width="100p" src="{% static '../static/images/splitwise_logo.jpg' %}"
+                 alt="Splitwise Logo">
+        </div>
+        <header>Wallet</header>
+        <div class="balance-report">
+            <label>your balance = {{ balance }} Toman</label>
+        </div>
+        <div>
+            <form method="post" action="{% url 'increase-balance' %}">
+                {% csrf_token %}
+                {% for field in form %}
+                    <label id="{{ field.id_for_label }}"></label>
+                    {{ field }}
+                {% endfor %}
+                <button type="submit">Increase Balance</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <form method="post" action="{% url 'increase-balance' %}">
-            {% csrf_token %}
-            {% for field in form %}
-                <label id="{{ field.id_for_label }}"></label>
-                {{ field }}
-            {% endfor %}
-            <button type="submit">Increase Balance</button>
-        </form>
-    </div>
-    </body>
+
 
 {% endblock %}

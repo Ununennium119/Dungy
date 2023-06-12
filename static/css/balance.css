@@ -3,11 +3,32 @@ header {
     font-size: x-large;
 }
 
+.container {
+    background-color: white;
+    border: 1px solid #2154b7;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 body {
     text-align: center;
     padding-top: 50px;
-    background-color: lightgray;
+    background-color: white;
 }
+
+.splitwise-logo {
+    margin-bottom: 20px;
+}
+
+.splitwise-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 .balance-report {
     padding-top: 20px;
