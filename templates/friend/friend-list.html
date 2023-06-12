@@ -10,47 +10,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>Friends</h2>
-        {% for friend in friends %}
-            <div class="friend">
-                <span>{{ friend.username }} ({{ friend.email }})</span>
-            </div>
-        {% endfor %}
-        <hr>
-        <h2>Sent Friend Requests</h2>
-        {% for friend_request in sent_friend_requests %}
-            <div class="friend-request">
-                <span>
-                    Friend Request to {{ friend_request.receiver.username }} ({{ friend_request.receiver.email }})
-                </span>
-                <form action="{% url 'cancel-friend-request' %}" method="post" class="inline-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ friend_request.receiver.username }}">
-                    <button type="submit" class="btn btn-secondary">Cancel</button>
-                </form>
-            </div>
-        {% endfor %}
-        <hr>
-        <h2>Received Friend Requests</h2>
-        {% for friend_request in received_friend_requests %}
-            <div class="friend-request">
-                <span>
-                    Friend Request from {{ friend_request.sender.username }} ({{ friend_request.sender.email }})
-                </span>
-                <form action="{% url 'accept-friend-request' %}" method="post" class="inline-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
-                    <button type="submit" class="btn btn-primary">Accept</button>
-                </form>
-                <form action="{% url 'reject-friend-request' %}" method="post" class="inline-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
-                    <button type="submit" class="btn btn-danger">Reject</button>
-                </form>
-            </div>
-        {% endfor %}
-        <hr>
+    <header>
+        <div class="container">
+            <h1>Invitations</h1>
+        </div>
+    </header>
+    <div class="sort-menu">
         <form id="sort-form" method="get" action="{% url 'friends-list' %}">
             <label for="friends-sort-by">Sort Friends By</label>
             <select id="friends-sort-by" name="friends-sort-by">
@@ -112,9 +77,59 @@
                 </option>
             </select>
             <br>
-            <button type="submit">Apply</button>
+            <button class="blue-btn" type="submit">Apply</button>
         </form>
-        <br>
-        <a href="{% url 'add-friend' %}" class="btn btn-primary">Add Friend</a>
+    </div>
+    <div class="container2">
+        <h2>Friends</h2>
+        <table>
+            {% for friend in friends %}
+                <tr class="friend">{{ friend.username }} ({{ friend.email }})</tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <h2>Sent Friend Requests</h2>
+        <table>
+            {% for friend_request in sent_friend_requests %}
+                <tr class="friend-request">
+                <span>
+                    Friend Request to {{ friend_request.receiver.username }} ({{ friend_request.receiver.email }})
+                </span>
+                    <form action="{% url 'cancel-friend-request' %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value="{{ friend_request.receiver.username }}">
+                        <button type="submit" class="btn btn-secondary">Cancel</button>
+                    </form>
+                </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <h2>Received Friend Requests</h2>
+        <table>
+            {% for friend_request in received_friend_requests %}
+                <tr class="friend-request">
+                <span>
+                    Friend Request from {{ friend_request.sender.username }} ({{ friend_request.sender.email }})
+                </span>
+                    <form action="{% url 'accept-friend-request' %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
+                        <button type="submit" class="btn btn-primary">Accept</button>
+                    </form>
+                    <form action="{% url 'reject-friend-request' %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="function-menu">
+        <a class="link" href="{% url 'add-friend' %}">Add Friend</a>
+    <br>
+    <a class="link" href="{% url 'dashboard' %}">Dashboard</a>
     </div>
 {% endblock %}

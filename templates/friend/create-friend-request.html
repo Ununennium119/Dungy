@@ -14,7 +14,8 @@
 {% block content %}
     <div class="container">
         <div class="splitwise-logo">
-            <img height="100p" width="100p" src="{% static 'images/logo.png' %}" alt="Splitwise Logo">
+            <img height="100p" width="100p" src="{% static '../static/images/splitwise_logo.jpg' %}"
+                 alt="Splitwise Logo">
         </div>
         <h1>Send a Friend Request</h1>
         <form id="create-cost-form" method="post" action="{% url 'add-friend' %}" enctype="multipart/form-data">
