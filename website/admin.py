@@ -11,6 +11,11 @@ class CostAdmin(admin.ModelAdmin):
     inlines = [CostMemberInline]
 
 
+@admin.register(CostMember)
+class CostMemberAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
     pass

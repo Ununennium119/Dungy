@@ -18,3 +18,7 @@ class CostCreationForm(forms.ModelForm):
             queryset=group_users
         )
         self.fields['paid_by'].queryset = group_users
+
+        self.fields['date'].widget = forms.widgets.DateInput(
+            attrs={'type': 'date'}
+        )
