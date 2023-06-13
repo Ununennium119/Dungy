@@ -48,7 +48,8 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
     box-sizing: border-box;
     width: 100%;
     padding: 10px;

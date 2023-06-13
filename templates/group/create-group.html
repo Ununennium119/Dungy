@@ -39,8 +39,16 @@
                         <div id="{{ field.name }}-container" class="form-group">
                             <div>
                                 <label for="{{ field.id_for_label }}" class="form-label">Member</label>
-                                {{ field }}
-                                <button id="remove-{{ field.name }}" data-field-name="{{ field.name }}" class="remove-btn red-btn">X</button>
+                                <div class="row">
+                                    <div class="col-11">
+                                        {{ field }}
+                                    </div>
+                                    <div class="col-1 text-center">
+                                        <button id="remove-{{ field.name }}" data-field-name="{{ field.name }}"
+                                                class="remove-btn red-btn">X
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="error-list">
                                     <ul>
                                         {% for error in field.errors %}
@@ -53,7 +61,7 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <button id="add-extra-member" class="green-btn">+ Add a person</button>
+            <button id="add-extra-member" class="btn btn-success">+ Add a person</button>
             <hr class="form-divider">
             <div class="form-group">
                 <label for="field.id_for_label" class="form-label">Group Type</label>
@@ -79,10 +87,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <button id="submit" type="submit" class="blue-btn">
+                <button id="submit" type="submit" class="btn">
                     Save
                 </button>
             </div>
+            <a href="{% url 'dashboard' %}" class="btn btn-danger" role="button">Back</a>
         </form>
     </div>
 {% endblock %}

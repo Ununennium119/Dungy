@@ -5,7 +5,10 @@
     <link rel="stylesheet" href="{% static 'css/login-register.css' %}">
 {% endblock %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}
+    Profile | Dungy
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <div class="body">
@@ -30,8 +33,9 @@
                     </div>
                 {% endif %}
                 <button type="submit" class="btn">Edit</button>
+                <br>
+                <a href="{% url 'dashboard' %}" class="btn btn-danger" role="button">Back</a>
             </form>
         </div>
     </div>
-
 {% endblock %}

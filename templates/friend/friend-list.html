@@ -11,73 +11,87 @@
 
 {% block content %}
     <header>
-        <div class="container">
-            <h1>Invitations</h1>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 container">
+                <h1>Friends</h1>
+            </div>
+            <div class="col-2">
+                <div class="function-menu">
+                    <a class="profile-button" href="{% url 'add-friend' %}">Add Friend</a>
+                    <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
+                </div>
+            </div>
         </div>
     </header>
-    <div class="sort-menu">
+    <div class="sort-menu container">
         <form id="sort-form" method="get" action="{% url 'friends-list' %}">
-            <label for="friends-sort-by">Sort Friends By</label>
-            <select id="friends-sort-by" name="friends-sort-by">
-                <option value="username-asc" {% if friends_sort_by == 'username-asc' %}selected=""{% endif %}>
-                    Username &#8593
-                </option>
-                <option value="username-desc" {% if friends_sort_by == 'username-desc' %}selected=""{% endif %}>
-                    Username &#8595
-                </option>
-                <option value="email-asc" {% if friends_sort_by == 'email-asc' %}selected=""{% endif %}>
-                    Email &#8593
-                </option>
-                <option value="email-desc" {% if friends_sort_by == 'email-desc' %}selected=""{% endif %}>
-                    Email &#8595
-                </option>
-            </select>
-            <br>
-            <label for="sent-sort-by">Sort Sent Friend Requests By</label>
-            <select id="sent-sort-by" name="sent-sort-by">
-                <option value="oldest" {% if sent_sort_by == 'oldest' %}selected=""{% endif %}>
-                    Oldest
-                </option>
-                <option value="newest" {% if sent_sort_by == 'newest' %}selected=""{% endif %}>
-                    Newest
-                </option>
-                <option value="username-asc" {% if sent_sort_by == 'username-asc' %}selected=""{% endif %}>
-                    Username &#8593
-                </option>
-                <option value="username-desc" {% if sent_sort_by == 'username-desc' %}selected=""{% endif %}>
-                    Username &#8595
-                </option>
-                <option value="email-asc" {% if sent_sort_by == 'email-asc' %}selected=""{% endif %}>
-                    Email &#8593
-                </option>
-                <option value="email-desc" {% if sent_sort_by == 'email-desc' %}selected=""{% endif %}>
-                    Email &#8595
-                </option>
-            </select>
-            <br>
-            <label for="received-sort-by">Sort Received Friend Requests By</label>
-            <select id="received-sort-by" name="received-sort-by">
-                <option value="oldest" {% if received_sort_by == 'oldest' %}selected=""{% endif %}>
-                    Oldest
-                </option>
-                <option value="newest" {% if received_sort_by == 'newest' %}selected=""{% endif %}>
-                    Newest
-                </option>
-                <option value="username-asc" {% if received_sort_by == 'username-asc' %}selected=""{% endif %}>
-                    Username &#8593
-                </option>
-                <option value="username-desc" {% if received_sort_by == 'username-desc' %}selected=""{% endif %}>
-                    Username &#8595
-                </option>
-                <option value="email-asc" {% if received_sort_by == 'email-asc' %}selected=""{% endif %}>
-                    Email &#8593
-                </option>
-                <option value="email-desc" {% if received_sort_by == 'email-desc' %}selected=""{% endif %}>
-                    Email &#8595
-                </option>
-            </select>
-            <br>
-            <button class="blue-btn" type="submit">Apply</button>
+            <div class="filter-container">
+                <label for="friends-sort-by">Sort Friends By</label>
+                <select id="friends-sort-by" name="friends-sort-by">
+                    <option value="username-asc" {% if friends_sort_by == 'username-asc' %}selected=""{% endif %}>
+                        Username &#8593
+                    </option>
+                    <option value="username-desc" {% if friends_sort_by == 'username-desc' %}selected=""{% endif %}>
+                        Username &#8595
+                    </option>
+                    <option value="email-asc" {% if friends_sort_by == 'email-asc' %}selected=""{% endif %}>
+                        Email &#8593
+                    </option>
+                    <option value="email-desc" {% if friends_sort_by == 'email-desc' %}selected=""{% endif %}>
+                        Email &#8595
+                    </option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="sent-sort-by">Sort Sent Friend Requests By</label>
+                <select id="sent-sort-by" name="sent-sort-by">
+                    <option value="oldest" {% if sent_sort_by == 'oldest' %}selected=""{% endif %}>
+                        Oldest
+                    </option>
+                    <option value="newest" {% if sent_sort_by == 'newest' %}selected=""{% endif %}>
+                        Newest
+                    </option>
+                    <option value="username-asc" {% if sent_sort_by == 'username-asc' %}selected=""{% endif %}>
+                        Username &#8593
+                    </option>
+                    <option value="username-desc" {% if sent_sort_by == 'username-desc' %}selected=""{% endif %}>
+                        Username &#8595
+                    </option>
+                    <option value="email-asc" {% if sent_sort_by == 'email-asc' %}selected=""{% endif %}>
+                        Email &#8593
+                    </option>
+                    <option value="email-desc" {% if sent_sort_by == 'email-desc' %}selected=""{% endif %}>
+                        Email &#8595
+                    </option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="received-sort-by">Sort Received Friend Requests By</label>
+                <select id="received-sort-by" name="received-sort-by">
+                    <option value="oldest" {% if received_sort_by == 'oldest' %}selected=""{% endif %}>
+                        Oldest
+                    </option>
+                    <option value="newest" {% if received_sort_by == 'newest' %}selected=""{% endif %}>
+                        Newest
+                    </option>
+                    <option value="username-asc" {% if received_sort_by == 'username-asc' %}selected=""{% endif %}>
+                        Username &#8593
+                    </option>
+                    <option value="username-desc" {% if received_sort_by == 'username-desc' %}selected=""{% endif %}>
+                        Username &#8595
+                    </option>
+                    <option value="email-asc" {% if received_sort_by == 'email-asc' %}selected=""{% endif %}>
+                        Email &#8593
+                    </option>
+                    <option value="email-desc" {% if received_sort_by == 'email-desc' %}selected=""{% endif %}>
+                        Email &#8595
+                    </option>
+                </select>
+            </div>
+            <div class="row text-center">
+                <button id="filter-btn" class="btn btn-primary" type="submit">Apply</button>
+            </div>
         </form>
     </div>
     <div class="container2">
@@ -127,9 +141,4 @@
     </div>
 
 
-    <div class="function-menu">
-        <a class="link" href="{% url 'add-friend' %}">Add Friend</a>
-    <br>
-    <a class="link" href="{% url 'dashboard' %}">Dashboard</a>
-    </div>
 {% endblock %}

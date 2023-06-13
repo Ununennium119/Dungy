@@ -21,7 +21,13 @@ function add_extra_member(e) {
 
     let element = document.createElement("div");
     element.innerHTML += `<label for="id_${field_name}" class="form-label">Member</label>\n`;
-    element.innerHTML += `<input type="email" name="${field_name}" id="id_${field_name}" autocomplete="off">\n`;
+
+    let row = document.createElement("div");
+    row.classList.add("row")
+
+    let col_11 = document.createElement("div");
+    col_11.classList.add("col-11")
+    col_11.innerHTML = `<input type="email" name="${field_name}" id="id_${field_name}" autocomplete="off">\n`;
 
     let remove_btn = document.createElement("button");
     remove_btn.id = `remove-${field_name}`;
@@ -29,6 +35,15 @@ function add_extra_member(e) {
     remove_btn.innerHTML = "X";
     remove_btn.classList.add("remove-btn", "red-btn"); // Add the necessary classes for styling
     element.append(remove_btn)
+
+    let col_1 = document.createElement("div")
+    col_1.classList.add("col-1")
+    col_1.appendChild(remove_btn)
+
+    row.appendChild(col_11)
+    row.appendChild(col_1)
+
+    element.appendChild(row)
 
     element.innerHTML += "<div><ul></ul></div>\n"
     container.append(element)

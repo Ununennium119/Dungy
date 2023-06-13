@@ -5,12 +5,31 @@
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
 
-{% block title %}Dashboard | Dungy{% endblock %}
+{% block title %}
+    Dashboard | Dungy
+{% endblock %}
 
 {% block content %}
     <header>
-        <div class="container">
-            <h1>Dungy</h1>
+        <div class="row">
+            <div class="col-2">
+                <div class="profile-menu">
+                    <a class="profile-button" href="{% url 'profile' %}">{{ username }}</a>
+                    <a class="profile-button" href="{% url 'increase-balance' %}">Wallet</a>
+                    <a class="profile-button" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+            <div class="col-8 container">
+                <a id="title-link" href="{% url 'home' %}">
+                    <h1>Dungy</h1>
+                </a>
+            </div>
+            <div class="col-2">
+                <div class="function-menu">
+                    <a class="profile-button" href={% url "create-group" %}>Create Group</a>
+                    <a class="profile-button" href={% url "friends-list" %}>Friends</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -93,20 +112,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="profile-menu">
-        <a class="profile-button" href="{% url 'profile' %}">{{ username }}</a>
-        <br>
-        <a class="profile-button" href="{% url 'logout' %}">Logout</a>
-        <br>
-        <a class="profile-button" href="{% url 'increase-balance' %}">Wallet</a>
-    </div>
-
-    <div class="function-menu">
-        <a class="profile-button" href={% url "create-group" %}>Create Group</a>
-        <br>
-        <a class="profile-button" href={% url "friends-list" %}>Friends</a>
     </div>
 
 {% endblock %}

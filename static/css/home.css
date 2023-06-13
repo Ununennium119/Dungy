@@ -13,7 +13,16 @@ header {
 
 h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: 36px;
+}
+
+#title-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+#title-link:hover {
+    color: #ccc;
 }
 
 .container {
@@ -26,21 +35,6 @@ h1 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-}
-
-.container3 {
-    max-width: 1200px;
-    width: 50%;
-    margin: 0 auto;
-    padding: 20px;
-    float: left;
-}
-
-.container4 {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    float: left;
 }
 
 
@@ -134,7 +128,6 @@ tr:hover {
 }
 
 .profile-menu {
-    position: absolute;
     top: 20px;
     left: 20px;
     padding: 10px 20px;
@@ -142,7 +135,6 @@ tr:hover {
 }
 
 .function-menu {
-    position: absolute;
     top: 20px;
     right: 20px;
     padding: 10px 20px;
@@ -150,6 +142,8 @@ tr:hover {
 }
 
 .profile-button {
+    display: block;
+    padding: 3px;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -195,36 +189,21 @@ footer {
     border: 3px solid #ff6b6b;
 }
 
-.links {
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.links:hover {
-    background-color: darkred;
-    border-radius: 15px;
-    border: 3px solid darkred;
-}
-
 .item-head {
-    color: red;
+    color: #111;
     font-size: x-large;
 }
 
 .item-stat {
+    box-sizing: content-box;
     color: blue;
     font-size: larger;
-    flex: available;
-    padding-bottom: 5px;
+    padding: 5px;
 }
 
 .item-stat:hover {
     background-color: #e6dbb9;
-    border-radius: 15px;
-    border: 3px solid #e6dbb9;
-    font-size: xx-large;
+    border-radius: 4px;
 }
 
 footer {

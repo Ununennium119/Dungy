@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block header_refrences %}
-    <link rel="stylesheet" href="{% static 'css/balance.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login-register.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -11,25 +11,54 @@
 
 {% block content %}
     <div class="container">
-        <div class="splitwise-logo">
-            <img height="100p" width="100p" src="{% static '../static/images/splitwise_logo.jpg' %}"
-                 alt="Splitwise Logo">
-        </div>
-        <header>Wallet</header>
-        <div class="balance-report">
-            <label>your balance = {{ balance }} Toman</label>
-        </div>
-        <div>
+        <div class="body">
             <form method="post" action="{% url 'increase-balance' %}">
                 {% csrf_token %}
                 {% for field in form %}
-                    <label id="{{ field.id_for_label }}"></label>
-                    {{ field }}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
                 {% endfor %}
-                <button type="submit">Increase Balance</button>
+                {% if error %}
+                    <div class="errorlist">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Increase Balance</button>
+                <br>
+                <a href="{% url 'dashboard' %}" class="btn btn-danger" role="button">Cancel</a>
             </form>
         </div>
     </div>
-
-
 {% endblock %}
+
+{#{% block content %}#}
+{#    <div class="container">#}
+{#        <div class="splitwise-logo">#}
+{#            <img height="100p" width="100p" src="{% static 'images/splitwise_logo.jpg' %}"#}
+{#                 alt="Splitwise Logo">#}
+{#        </div>#}
+{#        <header>Wallet</header>#}
+{#        <div class="balance-report">#}
+{#            <label>your balance = {{ balance }} Toman</label>#}
+{#        </div>#}
+{#        <div>#}
+{#            <form method="post" action="{% url 'increase-balance' %}">#}
+{#                {% csrf_token %}#}
+{#                {% for field in form %}#}
+{#                    <label id="{{ field.id_for_label }}"></label>#}
+{#                    {{ field }}#}
+{#                {% endfor %}#}
+{#                <button type="submit">Increase Balance</button>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

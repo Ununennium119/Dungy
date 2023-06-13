@@ -9,34 +9,40 @@
     Send a Friend Request | Dungy
 {% endblock %}
 
-
-
 {% block content %}
     <div class="container">
-        <div class="splitwise-logo">
-            <img height="100p" width="100p" src="{% static '../static/images/splitwise_logo.jpg' %}"
-                 alt="Splitwise Logo">
+        <div class="logo">
+            <img width="150" src="{% static 'images/splitwise_logo.jpg' %}"
+                 alt="Logo">
         </div>
         <h1>Send a Friend Request</h1>
         <form id="create-cost-form" method="post" action="{% url 'add-friend' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-                {% for field in form %}
-                    <div class="form-field">
-                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {{ field }}
-                        <div class="error-messages">
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <ul class="errorlist">
                             {% for error in field.errors %}
-                                <span class="error">{{ error }}</span>
+                                <li>{{ error }}</li>
                             {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
-                <div class="form-actions">
-                    <button id="submit" type="submit" class="btn btn-primary">Send Friend Request</button>
-                    <br>
-                    <a href="{% url 'friends-list' %}" class="link">friends</a>
+                        </ul>
+                    {% endif %}
                 </div>
+            {% endfor %}
+
+            {% if error %}
+                <div class="errorlist">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <div class="form-actions">
+                <button id="submit" type="submit" class="btn btn-primary">Send Friend Request</button>
+                <br>
+                <a href="{% url 'friends-list' %}" class="btn" role="button">Back</a>
             </div>
         </form>
     </div>

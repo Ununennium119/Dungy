@@ -21,6 +21,6 @@ class UserLoginForm(forms.Form):
             validators.MaxLengthValidator(150)
         ]
     )
-    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
 
 

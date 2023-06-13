@@ -10,7 +10,7 @@
 {% block content %}
     <div class="container">
         <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="Splitwise Logo" width="150">
+            <img src="{% static 'images/splitwise_logo.jpg' %}" alt="Splitwise Logo" width="150">
         </div>
         <h1>Create a Dungy Account</h1>
         <form action="{% url 'register' %}" method="post">
@@ -32,6 +32,7 @@
 
             <button type="submit" class="btn">Register</button>
         </form>
+        <br>
         <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
     </div>
 {% endblock %}

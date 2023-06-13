@@ -27,7 +27,6 @@ h2 {
 }
 
 .function-menu {
-    position: absolute;
     top: 20px;
     right: 20px;
     padding: 10px 20px;
@@ -105,24 +104,45 @@ header {
 
 
 .blue-btn {
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .blue-btn:hover {
-  background-color: darkblue;
+    background-color: darkblue;
 }
 
 .blue-btn:focus {
-  outline: none;
+    outline: none;
 }
 
 .blue-btn:active {
-  background-color: navy;
+    background-color: navy;
+}
+
+.filter-container {
+    margin: 5px;
+}
+
+#filter-btn {
+    width: 78%;
+}
+
+.profile-button {
+    display: block;
+    padding: 3px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.profile-button:hover {
+    background-color: darkred;
 }

@@ -22,7 +22,13 @@ class GroupCreationForm(forms.ModelForm):
         self.fields['members_fields_count'].initial = members_fields_count
         for i in range(members_fields_count):
             self.fields[f'member_{i}'] = forms.EmailField(label='', required=False,
-                                                          widget=forms.TextInput(attrs={'autocomplete': 'off'}))
+                                                          widget=forms.TextInput(
+                                                              attrs={'autocomplete': 'off',
+                                                                     'placeholder': 'Enter member\'s email'}))
+
+        self.fields['name'].widget = forms.TextInput(attrs={
+            'placeholder': 'Enter group name'
+        })
 
     def get_members_email(self):
         members_email = []
