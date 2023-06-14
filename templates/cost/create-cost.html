@@ -12,29 +12,35 @@
 {% block content %}
     <div class="container">
         <h1>Add an expense</h1>
-        <form id="create-cost-form" method="post" action="{% url 'create-cost' slug=request.resolver_match.kwargs.slug %}"
+        <form id="create-cost-form" method="post"
+              action="{% url 'create-cost' slug=request.resolver_match.kwargs.slug %}"
               enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-                {% for field in form %}
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        </div>
-                        <div class="col-md-9">
-                            {{ field }}
-                            <ul class="error-list">
-                                {% for error in field.errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="form-group">
-                <button id="submit" type="submit" class="btn btn-primary">Save</button>
-            </div>
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% if error %}
+                <div class="errorlist">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <br>
+            <a href="{% url 'single-group' slug=request.resolver_match.kwargs.slug %}" class="btn btn-danger"
+               role="button">Back</a>
         </form>
     </div>
 {% endblock %}

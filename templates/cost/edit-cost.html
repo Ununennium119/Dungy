@@ -2,40 +2,45 @@
 {% load static %}
 {% load startswith %}
 
+{% block header_refrences %}
+    <link rel="stylesheet" href="{% static 'css/cost.css' %}">
+{% endblock %}
+
 {% block title %}
-	Add an expense | Dungy
+    Edit an expense | Dungy
 {% endblock %}
 
 {% block content %}
-	<h1>Add an expense</h1>
-	<form id="edit-cost-form" method="post"
-          action="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}"
-		  enctype=multipart/form-data>
-		{% csrf_token %}
-		<div>
-			{% for field in form %}
-				<div>
-					<div>
-						<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-						{{ field }}
-						<div>
-							<ul>
-								{% for error in field.errors %}
-									<li>{{ error }}</li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-			<div>
-				<div>
-					<button id="submit" type="submit">
-						Save
-					</button>
-				</div>
-			</div>
-		</div>
-	</form>
-    <a href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}">Cancel</a>
+    <div class="container">
+        <h1>Edit an expense</h1>
+        <form id="edit-cost-form" method="post"
+              action="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}"
+              enctype=multipart/form-data>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% if error %}
+                <div class="errorlist">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <br>
+            <a href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}" class="btn btn-danger"
+               role="button">Cancel</a>
+        </form>
+    </div>
 {% endblock %}

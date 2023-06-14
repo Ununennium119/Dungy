@@ -64,13 +64,7 @@ input[type="number"] {
     padding: 10px;
     font-size: 16px;
     text-align: center;
-    background-color: #3883e6;
-    color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #3369c9;
 }

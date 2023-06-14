@@ -7,14 +7,29 @@
 {% block title %}Delete Cost | Dungy{% endblock %}
 
 {% block content %}
-    <body>
-    <div class="question-box">
+    <div class="container">
         <form method="post" action="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">
             {% csrf_token %}
-            <p>Are you sure you want to delete <strong>{{ object.description }}</strong> in group <strong>{{ object.group.name }}</strong>?</p>
-            <input class="delete-cost" type="submit" value="Confirm">
-            <a class="confirm-pay" href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}">Back</a>
+
+            <p>Are you sure you want to delete <strong>{{ object.description }}</strong> in group
+                <strong>{{ object.group.name }}</strong>?</p>
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <input class="btn btn-primary" type="submit" value="Confirm">
+            <br>
+            <a class="btn btn-danger" href="{% url 'single-cost' group_slug=object.group.slug pk=object.id %}">Back</a>
         </form>
     </div>
-    </body>
 {% endblock %}

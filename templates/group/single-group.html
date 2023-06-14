@@ -11,45 +11,63 @@
 
 {% block content %}
     <header>
-        <h1>{{ object.name }}</h1>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 container">
+                <h1>{{ object.name }}</h1>
+            </div>
+            <div class="col-2">
+                <div class="profile-menu">
+                    <a class="profile-button" href={% url "dashboard" %}>Dashboard</a>
+                    <a class="profile-button" href={% url "create-cost" slug=object.slug %}>Add an Expense</a>
+                </div>
+            </div>
+        </div>
     </header>
+
     <div class="sidebar">
         <form action="{% url 'single-group' slug=object.slug %}" method="get">
-            <label for="sort-by">Sort By</label>
-            <select id="sort-by" name="sort-by">
-                <option value="newest" {% if sort_by == 'newest' %}selected=""{% endif %}>
-                    Newest
-                </option>
-                <option value="oldest" {% if sort_by == 'oldest' %}selected=""{% endif %}>
-                    Oldest
-                </option>
-                <option value="amount-asc" {% if sort_by == 'amount-asc' %}selected=""{% endif %}>
-                    Amount &#8593
-                </option>
-                <option value="amount-desc" {% if sort_by == 'amount-desc' %}selected=""{% endif %}>
-                    Amount &#8595
-                </option>
-                <option value="description-asc" {% if sort_by == 'description-asc' %}selected=""{% endif %}>
-                    Description &#8593
-                </option>
-                <option value="description-desc" {% if sort_by == 'description-desc' %}selected=""{% endif %}>
-                    Description &#8595
-                </option>
-            </select>
-            <br>
-            <label for="archived-input">Archived</label>
-            <input id="archived-input" name="archived" type="checkbox" {% if archived %}checked{% endif %}/>
-            <br>
-            <label for="only-input">Only My Costs</label>
-            <input id="only-input" name="only" type="checkbox" {% if only %}checked{% endif %}/>
-            <br>
-            <label for="paid-input">Paid</label>
-            <input id="paid-input" name="paid" type="checkbox" {% if paid %}checked{% endif %}
-                   {% if not only %}disabled{% endif %}/>
-            <br>
-            <button id="submit-filter" type="submit">
-                Filter
-            </button>
+            <div class="form-group">
+                <label for="sort-by">Sort By</label>
+                <select id="sort-by" name="sort-by">
+                    <option value="newest" {% if sort_by == 'newest' %}selected=""{% endif %}>
+                        Newest
+                    </option>
+                    <option value="oldest" {% if sort_by == 'oldest' %}selected=""{% endif %}>
+                        Oldest
+                    </option>
+                    <option value="amount-asc" {% if sort_by == 'amount-asc' %}selected=""{% endif %}>
+                        Amount &#8593
+                    </option>
+                    <option value="amount-desc" {% if sort_by == 'amount-desc' %}selected=""{% endif %}>
+                        Amount &#8595
+                    </option>
+                    <option value="description-asc" {% if sort_by == 'description-asc' %}selected=""{% endif %}>
+                        Description &#8593
+                    </option>
+                    <option value="description-desc" {% if sort_by == 'description-desc' %}selected=""{% endif %}>
+                        Description &#8595
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="archived-input">Archived</label>
+                <input id="archived-input" name="archived" type="checkbox" {% if archived %}checked{% endif %}/>
+            </div>
+            <div class="form-group">
+                <label for="only-input">Only My Costs</label>
+                <input id="only-input" name="only" type="checkbox" {% if only %}checked{% endif %}/>
+            </div>
+            <div class="form-group">
+                <label for="paid-input">Paid</label>
+                <input id="paid-input" name="paid" type="checkbox" {% if paid %}checked{% endif %}
+                       {% if not only %}disabled{% endif %}/>
+            </div>
+            <div class="form-group">
+                <button id="submit-filter" class="btn btn-primary" type="submit">
+                    Filter
+                </button>
+            </div>
         </form>
     </div>
 
@@ -57,10 +75,10 @@
         <h2>Expenses</h2>
         <table class="table-costs">
             <tr>
-                <td><b>date</b></td>
-                <td><b>description</b></td>
-                <td><b>paid by</b></td>
-                <td><b>amount</b></td>
+                <td><b>Date</b></td>
+                <td><b>Description</b></td>
+                <td><b>Paid by</b></td>
+                <td><b>Amount</b></td>
                 <td></td>
             </tr>
             {% for cost in costs %}
@@ -75,13 +93,6 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>
-
-    <div class="profile-menu">
-        <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
-        <br>
-        <a class="profile-button" href="{% url 'create-cost' slug=object.slug %}">Add an expense</a>
-
     </div>
 {% endblock %}
 

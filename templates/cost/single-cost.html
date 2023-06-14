@@ -2,41 +2,60 @@
 {% load static %}
 
 {% block header_refrences %}
-    <link rel="stylesheet" href="{% static 'css/cost.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cost_page.css' %}">
 {% endblock %}
 
 {% block title %}{{ object.description }} | Dungy{% endblock %}
 
 {% block content %}
-    <h2>{{ object.description }}</h2>
+    <header>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 container">
+                <h1>{{ object.description }}</h1>
+            </div>
+            <div class="col-2">
+                <div class="profile-menu">
+                    <a class="profile-button" href={% url "dashboard" %}>Dashboard</a>
+                    <a class="profile-button" href={% url "single-group" slug=object.group.slug %}>Back to Group</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <body>
-    {% if object.image %}
-        <img src="{{ object.image.url }}" alt="Expense Image" width="50px" height="50px">
-        <br>
-        <br>
-    {% endif %}
-    <span>Amount: {{ object.amount }} Toman</span>
-    <br>
-    <span>Paid By: {{ object.paid_by.username }} ({{ object.paid_by.email }})</span>
-    <br>
-    <span>Date: {{ object.date }}</span>
-    <br>
-    <span>Group: {{ object.group.name }}</span>
-    <br>
-    <span>Is Archived: {% if object.archived %}Yes{% else %}No{% endif %}</span>
-    {% if object.note %}
-        <br>
-        <br>
-        <span>Notes:</span>
-        <p>{{ object.note }}</p>
-    {% endif %}
-    <div class="cost-actions">
-        <a href="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}">Edit</a>
-        <a href="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">Delete</a>
-        <a href="{% url 'single-group' slug=object.group.slug %}">Back</a>
-        {% if not is_paid %}
-            <a href="{% url 'confirm-cost-payment' group_slug=object.group.slug pk=object.id %}">Pay</a>
-        {% endif %}
+    <div id="cost-container" class="container">
+        <div class="row">
+            <div class="col-6 offset-3 text-center">{% if object.image %}
+                <img src="{{ object.image.url }}" alt="Expense Image" width="500px">
+                <br>
+                <br>
+            {% endif %}
+                <span><b>Amount:</b> {{ object.amount }} Toman</span>
+                <br>
+                <span><b>Paid By:</b> {{ object.paid_by.username }} ({{ object.paid_by.email }})</span>
+                <br>
+                <span><b>Date:</b> {{ object.date }}</span>
+                <br>
+                <span><b>Group:</b> {{ object.group.name }}</span>
+                <br>
+                <span><b>Is Archived:</b> {% if object.archived %}Yes{% else %}No{% endif %}</span>
+                {% if object.note %}
+                    <br>
+                    <br>
+                    <span>Notes:</span>
+                    <p>{{ object.note }}</p>
+                {% endif %}
+                <div id="cost-actions">
+                    <a class="btn btn-warning" href="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'single-group' slug=object.group.slug %}">Back</a>
+                    {% if not is_paid %}
+                        <a href="{% url 'confirm-cost-payment' group_slug=object.group.slug pk=object.id %}">Pay</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
     </body>
 {% endblock %}

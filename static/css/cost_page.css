@@ -1,0 +1,41 @@
+header {
+    background-color: #ff6b6b;
+    color: #fff;
+    margin-bottom: 0;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.profile-menu {
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.profile-button {
+    display: block;
+    padding: 3px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.profile-button:hover {
+    background-color: darkred;
+}
+
+#cost-actions {
+    margin: 10px 0;
+}
+
+#cost-actions a {
+    width: 100px;
+}
+
+#cost-container {
+    margin-top: 20px;
+}
