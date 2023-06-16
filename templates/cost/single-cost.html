@@ -49,10 +49,10 @@
                 <div id="cost-actions">
                     <a class="btn btn-warning" href="{% url 'edit-cost' group_slug=object.group.slug pk=object.id %}">Edit</a>
                     <a class="btn btn-danger" href="{% url 'delete-cost' group_slug=object.group.slug pk=object.id %}">Delete</a>
-                    <a class="btn btn-primary" href="{% url 'single-group' slug=object.group.slug %}">Back</a>
                     {% if not is_paid %}
                         <a class="btn btn-success" href="{% url 'confirm-cost-payment' group_slug=object.group.slug pk=object.id %}">Pay</a>
                     {% endif %}
+                    <a class="btn btn-primary" href="{% url 'single-group' slug=object.group.slug %}">Back</a>
                 </div>
             </div>
         </div>
