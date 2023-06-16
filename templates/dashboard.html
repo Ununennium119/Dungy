@@ -36,7 +36,7 @@
     <div class="container">
         <div class="row text-center">
             <div id="balance-card" class="col-4 offset-4 bg-dark rounded-5">
-                <h3 class="text-light">Balance: {{ user.balance }} Toman</h3>
+                <h3 class="text-light">Balance: {{ user.balance|floatformat:"3" }} Toman</h3>
             </div>
         </div>
     </div>
@@ -47,17 +47,17 @@
                 <div class="balance-card text-danger">
                     <h3 class="fw-bold">You Owe</h3>
                     <hr>
-                    <p>{{ owe }} Toman</p>
+                    <p>{{ owe|floatformat:"3" }} Toman</p>
                 </div>
                 <div class="balance-card text-success">
                     <h3 class="fw-bold">You Are Owed</h3>
                     <hr>
-                    <p>{{ owed }} Toman</p>
+                    <p>{{ owed|floatformat:"3" }} Toman</p>
                 </div>
                 <div class="balance-card text-primary">
                     <h3 class="fw-bold">Total</h3>
                     <hr>
-                    <p>{{ total_balance }} Toman</p>
+                    <p>{{ total_balance|floatformat:"3"  }} Toman</p>
                 </div>
             </div>
         </div>
