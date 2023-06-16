@@ -112,7 +112,7 @@
                     <form action="{% url 'cancel-friend-request' %}" method="post" class="inline-form">
                         {% csrf_token %}
                         <input type="hidden" name="username" value="{{ friend_request.receiver.username }}">
-                        <button type="submit" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Cancel</button>
                     </form>
                 </tr>
             {% endfor %}
@@ -128,7 +128,7 @@
                     <form action="{% url 'accept-friend-request' %}" method="post" class="inline-form">
                         {% csrf_token %}
                         <input type="hidden" name="username" value="{{ friend_request.sender.username }}">
-                        <button type="submit" class="btn btn-primary">Accept</button>
+                        <button type="submit" class="btn btn-success">Accept</button>
                     </form>
                     <span>    </span>
                     <form action="{% url 'reject-friend-request' %}" method="post" class="inline-form">
