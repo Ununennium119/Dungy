@@ -27,14 +27,15 @@
             </div>
             <div class="col-2">
                 <div class="function-menu">
-                    <div>
-                        <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
-                    </div>
-                    <div>
-                        {% if not request.user.is_authenticated %}
+                    {% if not request.user.is_authenticated %}
+                        <div>
                             <a class="profile-button" href="{% url 'login' %}">Log In</a>
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a class="profile-button" href="{% url 'dashboard' %}">Dashboard</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -63,29 +64,29 @@
         </div>
     </div>
 
-    <body>
-    <div class="row">
-        <div class="col-3"></div>
-
-        <div class="col-3 container3 text-center">
-            <label class="item-head">Guide</label>
-            <br>
-            <label class="item-stat">sed enim ut sem viverra</label>
-            <br>
-            <label class="item-stat">id leo in vitae turpis</label>
-        </div>
-
-        <div class="col-3 container4 text-center">
-            <label class="item-head">About Us</label>
-            <br>
-            <label class="item-stat">tincidunt praesent semper feugiat nibh</label>
-            <br>
-            <label class="item-stat">ipsum dolor sit amet consectetur</label>
-        </div>
-
-        <div class="col-3"></div>
-    </div>
-    </body>
+{#    <body>#}
+{#    <div class="row">#}
+{#        <div class="col-3"></div>#}
+{##}
+{#        <div class="col-3 container3 text-center">#}
+{#            <label class="item-head">Guide</label>#}
+{#            <br>#}
+{#            <label class="item-stat">sed enim ut sem viverra</label>#}
+{#            <br>#}
+{#            <label class="item-stat">id leo in vitae turpis</label>#}
+{#        </div>#}
+{##}
+{#        <div class="col-3 container4 text-center">#}
+{#            <label class="item-head">About Us</label>#}
+{#            <br>#}
+{#            <label class="item-stat">tincidunt praesent semper feugiat nibh</label>#}
+{#            <br>#}
+{#            <label class="item-stat">ipsum dolor sit amet consectetur</label>#}
+{#        </div>#}
+{##}
+{#        <div class="col-3"></div>#}
+{#    </div>#}
+{#    </body>#}
 
     <footer>
         Made in Iran
