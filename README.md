@@ -1,2 +1,3 @@
 # Dungy
-A web application for managing expenses
+
+A Django based web application for managing expenses.
